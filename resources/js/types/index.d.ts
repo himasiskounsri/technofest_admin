@@ -17,8 +17,8 @@ export type PageProps<
     eventRegistration: EventRegistration;
     eventRegistrations: EventRegistration[];
 
-    eventRegistrationPayment: EventRegistrationPayment;
-    eventRegistrationPayments: EventRegistrationPayment[];
+    payment: EventRegistrationPayment;
+    payments: EventRegistrationPayment[];
 
     milestone: Milestone;
     milestones: Milestone[];
@@ -59,6 +59,7 @@ export interface Faq {
     question: string;
     answer: string;
     is_highlighted: boolean;
+    created_by: User;
     created_at: Date;
     updated_at: Date;
 }
@@ -87,17 +88,15 @@ export interface SeminarCast {
     updated_at: Date;
 }
 
-export interface Seminar {
+export interface Seminar extends Event {
     id: string;
-    event: Event;
     created_at: Date;
     updated_at: Date;
 }
 
-export interface Competition {
+export interface Competition extends Event {
     id: string;
     max_participants: number;
-    event: Event;
     created_at: Date;
     updated_at: Date;
 }
@@ -125,18 +124,18 @@ export interface Milestone {
     updated_at: Date;
 }
 
-export interface EventRegistrationPayment {
+export interface EventRegistrationPayment extends EventRegistration {
     id: string;
+    uid: string;
     status: number;
     payment_proof?: string;
-    event_registration: EventRegistration;
     created_at: Date;
     updated_at: Date;
 }
 
-export interface EventRegistration {
+export interface EventRegistration extends Event {
     id: string;
-    event: Event;
+    uid: string;
     created_at: Date;
     updated_at: Date;
 }

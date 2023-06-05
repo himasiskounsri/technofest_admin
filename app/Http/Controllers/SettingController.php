@@ -10,12 +10,7 @@ class SettingController extends Controller
 {
     public function index()
     {
-        return redirect()->route('settings.festival');
-    }
-
-    public function festival()
-    {
-        return Inertia::render('Setting/Festival/Index');
+        return redirect()->route('settings.account');
     }
 
     public function account()

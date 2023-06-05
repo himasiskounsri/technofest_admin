@@ -1,7 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/Ui/Card";
+import { Badge } from "@/Components/Ui/Badge";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/Components/Ui/Card";
 import { DataTable } from "@/Components/Ui/DataTable";
+import { Separator } from "@/Components/Ui/Separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/Ui/Tabs";
-import AuthenticatedLayout from "@/Layouts/Authenticated/Layout";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout/Layout";
 import { columns, registrationColumns } from "@/lib/table";
 import { Festival, PageProps, User } from "@/types";
 import { Head, usePage } from "@inertiajs/react";
@@ -87,15 +95,50 @@ export default function DashboardPage({
                         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 min-h-[20rem]">
                             <Card className="col-span-3">
                                 <CardHeader>
-                                    <CardTitle>Overview</CardTitle>
+                                    <CardTitle className="flex items-center space-x-2">
+                                        <span>
+                                            {flash.current_festival.name}
+                                        </span>
+                                        <Badge>
+                                            Periode{" "}
+                                            {flash.current_festival.period}
+                                        </Badge>
+                                    </CardTitle>
+                                    <CardDescription>
+                                        {flash.current_festival.theme}
+                                    </CardDescription>
                                 </CardHeader>
-                                <CardContent className="text-muted-foreground">
-                                    <h2>{flash.current_festival.name}</h2>
+                                <CardContent className="text-muted-foreground space-y-4">
                                     <p>{flash.current_festival.description}</p>
-                                    <p>{flash.current_festival.period}</p>
-                                    <p>{flash.current_festival.theme}</p>
-                                    <p>{flash.current_festival.start_date}</p>
-                                    <p>{flash.current_festival.end_date}</p>
+                                    <Separator />
+                                    <div className="flex flex-col space-y-4 max-w-xl">
+                                        <Card>
+                                            <CardHeader className="p-4 pb-1">
+                                                <CardTitle>
+                                                    Mulai Festival
+                                                </CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="text-muted-foreground p-4 pt-0">
+                                                {
+                                                    flash.current_festival
+                                                        .start_date
+                                                }
+                                            </CardContent>
+                                        </Card>
+                                        <Card>
+                                            <CardHeader className="p-4 pb-1">
+                                                <CardTitle>
+                                                    Akhir Festival
+                                                </CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="text-muted-foreground p-4 pt-0">
+                                                {
+                                                    flash.current_festival
+                                                        .end_date
+                                                }
+                                            </CardContent>
+                                        </Card>
+                                    </div>
                                 </CardContent>
                             </Card>
                         </div>

@@ -2,7 +2,7 @@ import { Separator } from "@/Components/Ui/Separator";
 import { MainNav } from "./MainNav";
 import { UserNav } from "./UserNav";
 import { Festival, User } from "@/types";
-import PeriodSwitcher from "@/Layouts/Authenticated/PeriodSwitcher";
+import PeriodSwitcher from "@/Layouts/AuthenticatedLayout/PeriodSwitcher";
 import { Badge } from "@/Components/Ui/Badge";
 import { usePage } from "@inertiajs/react";
 import { BadgeCheck, CheckCheck } from "lucide-react";
@@ -26,11 +26,10 @@ export default function Header({ user }: { user: User }) {
                 <div className="ml-auto flex items-center space-x-4">
                     <Badge
                         // variant="outline"
-                        className="flex items-center  space-x-1 cursor-pointer"
+                        className="flex items-center space-x-1 cursor-pointer bg-success text-success-foreground hover:bg-success/90"
                     >
-                        <CheckCheck />{" "}
+                        <CheckCheck />
                         <span className="font-normal">
-                            {" "}
                             Periode {activeFestival.period}
                         </span>
                         : Aktif

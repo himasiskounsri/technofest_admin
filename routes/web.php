@@ -1,17 +1,17 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\EventRegistrationPaymentController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\FestivalPeriodController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
-use App\Models\EventRegistrationPayment;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\RegistrationManagerTokenController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,22 +47,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('/festival')->group(function () {
+        Route::resource('/festivals', FestivalController::class);
+        Route::resource('/events', EventController::class);
+        Route::resource('/registrations', EventRegistrationController::class);
+        Route::resource('/participants', ParticipantController::class);
+        Route::resource('/payments', EventRegistrationPaymentController::class);
+        Route::resource('/faqs', FaqController::class);
+    });
 
-    Route::resource('/events', EventController::class);
+    Route::prefix('/user')->group(function () {
+        Route::resource('/managers', ManagerController::class);
+        Route::resource('/token', RegistrationManagerTokenController::class)->only(['index', 'store']);
+    });
 
-    Route::resource('/payments', EventRegistrationPaymentController::class);
-
-    Route::resource('/users', UserController::class);
-
-    Route::resource('/faqs', FaqController::class);
-
-    Route::prefix('/settings')->group(function () {
-        Route::get('/', [SettingController::class, 'index'])->name('settings.index');
-        Route::get('/festival', [SettingController::class, 'festival'])->name('settings.festival');
-        Route::get('/account', [SettingController::class, 'account'])->name('settings.account');
+    Route::prefix('/setting')->group(function () {
+        Route::resource('/account', AccountController::class);
     });
 
     Route::patch('/festival-period', [FestivalPeriodController::class, 'update'])->name('festival_period.update');

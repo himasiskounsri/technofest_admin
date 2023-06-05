@@ -1,4 +1,4 @@
-import Authenticated from "@/Layouts/Authenticated/Layout";
+import Authenticated from "@/Layouts/AuthenticatedLayout/Layout";
 import { PageProps } from "@/types";
 
 export default function UserEdit({ auth }: PageProps) {

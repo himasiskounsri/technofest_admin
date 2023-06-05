@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EventRegistration;
 use App\Http\Requests\StoreEventRegistrationRequest;
 use App\Http\Requests\UpdateEventRegistrationRequest;
+use Inertia\Inertia;
 
 class EventRegistrationController extends Controller
 {
@@ -13,7 +14,7 @@ class EventRegistrationController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Festival/Registration/Index');
     }
 
     /**

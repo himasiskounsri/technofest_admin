@@ -16,7 +16,7 @@ class FaqController extends Controller
     {
         $faqs = Faq::all();
 
-        return Inertia::render('Faq/Index', [
+        return Inertia::render('Festival/Faq/Index', [
             'faqs' => $faqs,
         ]);
     }

@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/Authenticated/Layout";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout/Layout";
 import DeleteUserForm from "./Partials/DeleteUserForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";

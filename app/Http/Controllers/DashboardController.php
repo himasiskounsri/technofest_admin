@@ -13,7 +13,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::with('eventRegistrations')->where('role', config('constants.user_role.participant'))->withCount('eventRegistrations')->get();
+        $users = User::with('eventRegistrations')
+            ->where('role', config('constants.user_role.participant'))
+            ->where('festival_id', session('current_festival_id'))
+            ->withCount('eventRegistrations')
+            ->get();
         // $registrations = EventRegistration::with(['event', 'eventRegistrationPayment'])->where('event.festival_id', session('current_festival_id'))->get();
         // $paymentsCount = EventRegistrationPayment::where('eventRegistration.event.festival_id', session('current_festival_id'))->count();
 

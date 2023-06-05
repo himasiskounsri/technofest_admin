@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EventRegistrationPayment;
 use App\Http\Requests\StoreEventRegistrationPaymentRequest;
 use App\Http\Requests\UpdateEventRegistrationPaymentRequest;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class EventRegistrationPaymentController extends Controller
@@ -14,9 +15,15 @@ class EventRegistrationPaymentController extends Controller
      */
     public function index()
     {
-        $payments = EventRegistrationPayment::all();
+        $payments = DB::table('event_registration_payments')
+            ->join('event_registrations', 'event_registration_id', '=', 'event_registrations.id')
+            ->join('events', 'event_registrations.event_id', '=', 'events.id')
+            ->join('festivals', 'events.festival_id', '=', 'festivals.id')
+            ->where('festivals.id', '=', session('current_festival_id'))
+            ->select('event_registration_payments.*', 'event_registrations.*')
+            ->get();
 
-        return Inertia::render('Payment/Index', [
+        return Inertia::render('Festival/Payment/Index', [
             'payments' => $payments
         ]);
     }

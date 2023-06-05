@@ -24,44 +24,28 @@ export function MainNav({
             </NavLink>
 
             <NavLink
-                href={route("events.index")}
+                href={route("festivals.index")}
                 method="get"
-                active={route().current("events.index")}
+                active={route().current("festivals.index")}
             >
-                Event
+                Festival
             </NavLink>
 
             <NavLink
-                href={route("payments.index")}
+                href={route("managers.index")}
                 method="get"
-                active={route().current("payments.index")}
-            >
-                Pembayaran
-            </NavLink>
-
-            <NavLink
-                href={route("faqs.index")}
-                method="get"
-                active={route().current("faqs.index")}
-            >
-                Faqs
-            </NavLink>
-
-            <NavLink
-                href={route("users.index")}
-                method="get"
-                active={route().current("users.index")}
+                active={route().current("managers.index")}
             >
                 Pengguna
             </NavLink>
 
             <NavLink
-                href={route("settings.index")}
+                href={route("account.index")}
                 method="get"
                 active={
-                    route().current("settings.index") ||
-                    route().current("settings.festival") ||
-                    route().current("settings.account")
+                    route().current("account.index") ||
+                    route().current("account.index") ||
+                    route().current("account.index")
                 }
             >
                 Pengaturan

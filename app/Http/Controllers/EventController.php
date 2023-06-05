@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 use function App\Helpers\nanoUid;
@@ -16,10 +18,23 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $competitions = DB::table('competitions')
+            ->join('events', 'event_id', '=', 'events.id')
+            ->join('festivals', 'events.festival_id', '=', 'festivals.id')
+            ->where('festivals.id', '=', session('current_festival_id'))
+            ->select('events.*', 'competitions.*')
+            ->get();
 
-        return Inertia::render('Event/Index', [
-            'events' => $events
+        $seminars = DB::table('seminars')
+            ->join('events', 'event_id', '=', 'events.id')
+            ->join('festivals', 'events.festival_id', '=', 'festivals.id')
+            ->where('festivals.id', '=', session('current_festival_id'))
+            ->select('events.*', 'seminars.*')
+            ->get();
+
+        return Inertia::render('Festival/Event/Index', [
+            'competitions' => $competitions,
+            'seminars' => $seminars
         ]);
     }
 

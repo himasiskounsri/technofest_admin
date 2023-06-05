@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('event_registrations', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('uid')->unique();
+            $table->string('name')->nullable();
             $table->ulid('event_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
