@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public function eventRegistrations(): BelongsToMany
     {
-        return $this->belongsToMany(EventRegistration::class);
+        return $this->belongsToMany(EventRegistration::class)->withPivot('role')->withTimestamps()->as('event_registrant');
     }
 
     public function eventRegistrationPayments(): HasMany

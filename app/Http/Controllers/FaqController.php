@@ -14,7 +14,10 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $faqs = Faq::all();
+        $faqs = Faq::with(['user:id,name'])
+            ->orderBy('is_highlighted', 'desc')
+            ->where('festival_id', session('current_festival_id'))
+            ->get();
 
         return Inertia::render('Festival/Faq/Index', [
             'faqs' => $faqs,

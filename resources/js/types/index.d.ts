@@ -8,14 +8,17 @@ export type PageProps<
     user: User;
     users: User[];
 
+    participant: User;
+    participants: User[];
+
     userProfile: UserProfile;
     userProfiles: UserProfile[];
 
     event: Event;
     events: Event[];
 
-    eventRegistration: EventRegistration;
-    eventRegistrations: EventRegistration[];
+    registration: EventRegistration;
+    registrations: EventRegistration[];
 
     payment: EventRegistrationPayment;
     payments: EventRegistrationPayment[];
@@ -50,6 +53,7 @@ export interface User {
     role: number;
     event_registrations?: EventRegistration[];
     avatar: Avatar;
+    event_registrant?: EventRegistrant;
     created_at: Date;
     updated_at: Date;
 }
@@ -59,7 +63,7 @@ export interface Faq {
     question: string;
     answer: string;
     is_highlighted: boolean;
-    created_by: User;
+    user: User;
     created_at: Date;
     updated_at: Date;
 }
@@ -88,14 +92,16 @@ export interface SeminarCast {
     updated_at: Date;
 }
 
-export interface Seminar extends Event {
+export interface Seminar {
     id: string;
+    event: Event;
     created_at: Date;
     updated_at: Date;
 }
 
-export interface Competition extends Event {
+export interface Competition {
     id: string;
+    event: Event;
     max_participants: number;
     created_at: Date;
     updated_at: Date;
@@ -124,18 +130,23 @@ export interface Milestone {
     updated_at: Date;
 }
 
-export interface EventRegistrationPayment extends EventRegistration {
+export interface EventRegistrationPayment {
     id: string;
     uid: string;
+    event_registration: EventRegistration;
     status: number;
     payment_proof?: string;
     created_at: Date;
     updated_at: Date;
 }
 
-export interface EventRegistration extends Event {
+export interface EventRegistration {
     id: string;
     uid: string;
+    users: User[];
+    event_registrant: EventRegistrant;
+    name: string;
+    event: Event;
     created_at: Date;
     updated_at: Date;
 }
@@ -170,6 +181,15 @@ export interface UserProfile {
 export interface Avatar {
     id: string;
     image: string;
+    created_at: Date;
+    updated_at: Date;
+}
+
+export interface EventRegistrant {
+    id: string;
+    role: number;
+    user: User;
+    event_registration: EventRegistration;
     created_at: Date;
     updated_at: Date;
 }

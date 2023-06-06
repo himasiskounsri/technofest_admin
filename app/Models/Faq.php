@@ -20,6 +20,11 @@ class Faq extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'created_by');
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function festival(): BelongsTo
+    {
+        return $this->belongsTo(Festival::class);
     }
 }

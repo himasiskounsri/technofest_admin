@@ -15,8 +15,9 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('question')->unique();
             $table->string('answer');
-            $table->boolean('is_highlighted');
+            $table->boolean('is_highlighted')->default(false);
             $table->foreignUlid('created_by')->nullable()->references('id')->on('users')->constraint()->nullOnDelete();
+            $table->foreignUlid('festival_id')->constraint()->cascadeOnDelete();
             $table->timestamps();
         });
     }

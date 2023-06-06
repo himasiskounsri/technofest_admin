@@ -7,11 +7,18 @@ import {
     ListContent,
     ListHeader,
     ListItem,
+    ListItemContent,
+    ListItemDescription,
+    ListItemDescriptionItem,
+    ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
 import { Badge } from "@/Components/Ui/Badge";
+import { User, Youtube } from "lucide-react";
 
 export default function FaqIndex({ auth, faqs }: PageProps) {
+    console.log(faqs);
+
     return (
         <FestivalLayout>
             <SectionTitle
@@ -25,22 +32,25 @@ export default function FaqIndex({ auth, faqs }: PageProps) {
                 <ListContent>
                     {faqs.map((faq) => (
                         <ListItem>
-                            <p className="font-medium">ID: {faq.question}</p>
-                            <p className="text-xs text-muted-foreground">
-                                Dibuat oleh: {faq.created_by.name}
-                            </p>
-                            <div className="flex space-x-1 items-center mt-1">
-                                {faq.is_highlighted && (
+                            <ListItemTitle>{faq.question}</ListItemTitle>
+                            <ListItemDescription>
+                                <ListItemDescriptionItem
+                                    icon={User}
+                                    value={faq.user.name}
+                                />
+                            </ListItemDescription>
+                            <ListItemContent>
+                                {faq.is_highlighted == true && (
                                     <Badge>Highlighted</Badge>
                                 )}
-                            </div>
+                            </ListItemContent>
                         </ListItem>
                     ))}
 
                     {faqs.length == 0 && (
                         <ListItem className="flex items-center justify-center py-10">
                             <p className="text-muted-foreground">
-                                Tidak ada Faq😅
+                                Tidak ada Faqs😅
                             </p>
                         </ListItem>
                     )}

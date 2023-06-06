@@ -17,6 +17,10 @@ import {
     ListContent,
     ListHeader,
     ListItem,
+    ListItemContent,
+    ListItemDescription,
+    ListItemDescriptionItem,
+    ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
 import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
@@ -50,16 +54,17 @@ export default function EventIndex({
                         <ListContent>
                             {competitions.map((competition) => (
                                 <ListItem>
-                                    <p className="font-medium">
-                                        {competition.name}
-                                    </p>
-                                    <p className="text-xs text-muted-foreground">
-                                        {competition.description ||
-                                            "Tanpa deskripsi"}
-                                    </p>
-                                    <div className="flex space-x-1 items-center mt-1">
+                                    <ListItemTitle>
+                                        {competition.event.name}
+                                    </ListItemTitle>
+                                    <ListItemDescription>
+                                        {competition.event.description || (
+                                            <ListItemDescriptionItem value="Tanpa deskripsi" />
+                                        )}
+                                    </ListItemDescription>
+                                    <ListItemContent>
                                         <span>
-                                            {competition.is_opened ? (
+                                            {competition.event.is_opened ? (
                                                 <Badge variant="success">
                                                     Buka
                                                 </Badge>
@@ -84,10 +89,7 @@ export default function EventIndex({
                                                 )}
                                             </Badge>
                                         </span>
-                                        <span>
-                                            {/* <Badge>{competition.price}</Badge> */}
-                                        </span>
-                                    </div>
+                                    </ListItemContent>
                                 </ListItem>
                             ))}
 
@@ -109,16 +111,17 @@ export default function EventIndex({
                         <ListContent>
                             {seminars.map((seminar) => (
                                 <ListItem>
-                                    <p className="font-medium">
-                                        {seminar.name}
-                                    </p>
-                                    <p className="text-xs text-muted-foreground">
-                                        {seminar.description ||
-                                            "Tanpa deskripsi"}
-                                    </p>
-                                    <div className="flex space-x-1 items-center mt-1">
+                                    <ListItemTitle>
+                                        {seminar.event.name}
+                                    </ListItemTitle>
+                                    <ListItemDescription>
+                                        {seminar.event.description || (
+                                            <ListItemDescriptionItem value="Tanpa deskripsi" />
+                                        )}
+                                    </ListItemDescription>
+                                    <ListItemContent>
                                         <span>
-                                            {seminar.is_opened ? (
+                                            {seminar.event.is_opened ? (
                                                 <Badge variant="success">
                                                     Buka
                                                 </Badge>
@@ -128,7 +131,7 @@ export default function EventIndex({
                                                 </Badge>
                                             )}
                                         </span>
-                                    </div>
+                                    </ListItemContent>
                                 </ListItem>
                             ))}
 

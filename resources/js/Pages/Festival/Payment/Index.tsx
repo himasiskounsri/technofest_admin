@@ -1,24 +1,20 @@
-import { Badge, badgeVariants } from "@/Components/Ui/Badge";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/Components/Ui/Card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/Ui/Tabs";
-import Authenticated from "@/Layouts/AuthenticatedLayout/Layout";
-import { PageProps } from "@/types";
-import { usePage } from "@inertiajs/react";
-import FestivalLayout from "../Layout";
+import { Badge } from "@/Components/Ui/Badge";
 import {
     List,
     ListContent,
     ListHeader,
     ListItem,
+    ListItemDescription,
+    ListItemDescriptionItem,
+    ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/Ui/Tabs";
 import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
+import { PageProps } from "@/types";
+import { usePage } from "@inertiajs/react";
+import { Flag, Wallet } from "lucide-react";
+import FestivalLayout from "../Layout";
 
 export default function PaymentIndex({ auth, payments }: PageProps) {
     const { constants }: any = usePage().props;
@@ -58,17 +54,27 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                     >
                         <List>
                             <ListHeader>
-                                <ListTitle>Daftar Kompetisi</ListTitle>
+                                <ListTitle>Daftar Pembayaran</ListTitle>
                             </ListHeader>
                             <ListContent>
                                 {payments.items.map((payment) => (
-                                    <ListItem>
-                                        <p className="font-medium">
+                                    <ListItem key={payment.id}>
+                                        <ListItemTitle>
                                             ID: {payment.uid}
-                                        </p>
-                                        <p className="text-xs text-muted-foreground">
-                                            {payment.price}
-                                        </p>
+                                        </ListItemTitle>
+                                        <ListItemDescription>
+                                            <ListItemDescriptionItem
+                                                icon={Flag}
+                                                value={
+                                                    payment.event_registration
+                                                        .event.name
+                                                }
+                                            />
+                                            <ListItemDescriptionItem
+                                                icon={Wallet}
+                                                value={`Rp${payment.event_registration.event.price}`}
+                                            />
+                                        </ListItemDescription>
                                         <div className="flex space-x-1 items-center mt-1">
                                             {payment.status ==
                                                 constants.payment_status

@@ -14,7 +14,13 @@ class EventRegistrationController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Festival/Registration/Index');
+        $registrations = EventRegistration::with(['event:id,name', 'users'])
+            ->whereRelation('event', 'festival_id', session('current_festival_id'))
+            ->get();
+
+        return Inertia::render('Festival/Registration/Index', [
+            'registrations' => $registrations
+        ]);
     }
 
     /**
