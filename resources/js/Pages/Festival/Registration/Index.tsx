@@ -10,12 +10,14 @@ import {
     ListItemContent,
     ListItemDescription,
     ListItemDescriptionItem,
+    ListItemDropdown,
     ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
 import { Badge } from "@/Components/Ui/Badge";
 import { usePage } from "@inertiajs/react";
 import { Flag, Users } from "lucide-react";
+import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
 
 export default function RegistrationIndex({ auth, registrations }: PageProps) {
     const { constants }: any = usePage().props;
@@ -54,7 +56,7 @@ export default function RegistrationIndex({ auth, registrations }: PageProps) {
                     >
                         <List>
                             <ListHeader>
-                                <ListTitle>Daftar Pendaftaran</ListTitle>
+                                <ListTitle>Data Pendaftaran</ListTitle>
                             </ListHeader>
                             <ListContent>
                                 {registrations.items.map((registration) => (
@@ -102,6 +104,12 @@ export default function RegistrationIndex({ auth, registrations }: PageProps) {
                                                 </Badge>
                                             </span> */}
                                         </ListItemContent>
+
+                                        <ListItemDropdown>
+                                            <DropdownMenuItem className="text-danger focus:text-danger focus:bg-danger-foreground/50">
+                                                Hapus
+                                            </DropdownMenuItem>
+                                        </ListItemDropdown>
                                     </ListItem>
                                 ))}
 

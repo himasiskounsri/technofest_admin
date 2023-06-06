@@ -3,9 +3,14 @@ import { Badge } from "./Badge";
 import { Card, CardContent, CardHeader, CardTitle } from "./Card";
 import { Separator } from "./Separator";
 import { cn } from "@/lib/utils";
-import { LucideProps } from "lucide-react";
+import { LucideProps, MoreHorizontal } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 import { VariantProps, cva } from "class-variance-authority";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
+} from "./DropdownMenu";
 
 interface ListProps {
     children: React.ReactNode;
@@ -52,7 +57,11 @@ interface ListItemProps {
 
 export function ListItem({ children, className }: ListItemProps) {
     return (
-        <CardContent className={cn("p-4", className)}>{children}</CardContent>
+        <CardContent
+            className={cn("p-4 relative hover:bg-secondary/50", className)}
+        >
+            {children}
+        </CardContent>
     );
 }
 
@@ -86,7 +95,7 @@ export function ListItemDescriptionItem({
     value,
 }: ListItemDescriptionItemProps) {
     return (
-        <span className="flex items-center space-x-1">
+        <span className="flex items-center space-x-0.5">
             {Tag && <Tag size={14} strokeWidth={2.3} />}
             <span>{value}</span>
         </span>
@@ -99,4 +108,30 @@ interface ListItemContentProps {
 
 export function ListItemContent({ children }: ListItemContentProps) {
     return <div className="flex space-x-1 items-center mt-1">{children}</div>;
+}
+
+interface ListItemDropdownProps {
+    children: React.ReactNode;
+}
+
+export function ListItemDropdown({ children }: ListItemDropdownProps) {
+    return (
+        <div className="absolute top-1 right-2">
+            <DropdownMenu>
+                <DropdownMenuTrigger
+                    asChild
+                    className="text-muted-foreground hover:text-primary hover:cursor-pointer"
+                >
+                    <MoreHorizontal />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                    className="w-56"
+                    align="end"
+                    alignOffset={-14}
+                >
+                    {children}
+                </DropdownMenuContent>
+            </DropdownMenu>
+        </div>
+    );
 }

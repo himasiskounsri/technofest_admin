@@ -42,10 +42,11 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'constants' => config('constants'),
-            'festivals' => Festival::all(['id', 'period', 'name', 'is_active']),
+            'festivals' => Festival::all(),
+            'current_festival_id' => $request->session()->get('current_festival_id'),
             'flash' => [
-                'current_festival' => fn () => Festival::where('id', $request->session()->get('current_festival_id'))->first()
-            ]
+                'message' => fn () => $request->session()->get('message')
+            ],
         ]);
     }
 }

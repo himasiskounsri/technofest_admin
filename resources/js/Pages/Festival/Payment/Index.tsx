@@ -6,15 +6,24 @@ import {
     ListItem,
     ListItemDescription,
     ListItemDescriptionItem,
+    ListItemDropdown,
     ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/Ui/Tabs";
+import {
+    Tabs,
+    TabsContent,
+    TabsHeader,
+    TabsList,
+    TabsTrigger,
+} from "@/Components/Ui/Tabs";
 import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
 import { PageProps } from "@/types";
 import { usePage } from "@inertiajs/react";
-import { Flag, Wallet } from "lucide-react";
+import { Flag, PlusCircle, Wallet } from "lucide-react";
 import FestivalLayout from "../Layout";
+import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
+import { Button } from "@/Components/Ui/Button";
 
 export default function PaymentIndex({ auth, payments }: PageProps) {
     const { constants }: any = usePage().props;
@@ -39,13 +48,21 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                 description="Konfirmasi pembayaran pendaftar event."
             />
             <Tabs defaultValue="all" className="space-y-4 mt-4 max-w-3xl">
-                <TabsList>
-                    <TabsTrigger value="all">Semua</TabsTrigger>
-                    <TabsTrigger value="not_confirmed">
-                        Belum dikonfirmasi
-                    </TabsTrigger>
-                    <TabsTrigger value="confirmed">Dikonfirmasi</TabsTrigger>
-                </TabsList>
+                <TabsHeader>
+                    <TabsList>
+                        <TabsTrigger value="all">Semua</TabsTrigger>
+                        <TabsTrigger value="not_confirmed">
+                            Belum dikonfirmasi
+                        </TabsTrigger>
+                        <TabsTrigger value="confirmed">
+                            Dikonfirmasi
+                        </TabsTrigger>
+                    </TabsList>
+                    <Button size="sm" variant="success">
+                        <PlusCircle />
+                        &nbsp;Tambah
+                    </Button>
+                </TabsHeader>
                 {payments_list.map((payments) => (
                     <TabsContent
                         key={payments.name}
@@ -54,7 +71,7 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                     >
                         <List>
                             <ListHeader>
-                                <ListTitle>Daftar Pembayaran</ListTitle>
+                                <ListTitle>Data Pembayaran</ListTitle>
                             </ListHeader>
                             <ListContent>
                                 {payments.items.map((payment) => (
@@ -100,6 +117,15 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                                                 </Badge>
                                             )}
                                         </div>
+
+                                        <ListItemDropdown>
+                                            <DropdownMenuItem>
+                                                Edit
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem className="text-danger focus:text-danger focus:bg-danger-foreground/50">
+                                                Hapus
+                                            </DropdownMenuItem>
+                                        </ListItemDropdown>
                                     </ListItem>
                                 ))}
 

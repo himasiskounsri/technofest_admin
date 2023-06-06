@@ -6,7 +6,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/Components/Ui/Card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/Ui/Tabs";
+import {
+    Tabs,
+    TabsContent,
+    TabsHeader,
+    TabsList,
+    TabsTrigger,
+} from "@/Components/Ui/Tabs";
 import Authenticated from "@/Layouts/AuthenticatedLayout/Layout";
 import { PageProps } from "@/types";
 import { usePage } from "@inertiajs/react";
@@ -20,10 +26,14 @@ import {
     ListItemContent,
     ListItemDescription,
     ListItemDescriptionItem,
+    ListItemDropdown,
     ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
 import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
+import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
+import { Button } from "@/Components/Ui/Button";
+import { PlusCircle } from "lucide-react";
 
 export default function EventIndex({
     auth,
@@ -42,14 +52,22 @@ export default function EventIndex({
                 defaultValue="competitions"
                 className="space-y-4 mt-4 max-w-3xl"
             >
-                <TabsList>
-                    <TabsTrigger value="competitions">Kompetisi</TabsTrigger>
-                    <TabsTrigger value="seminars">Seminar</TabsTrigger>
-                </TabsList>
+                <TabsHeader>
+                    <TabsList>
+                        <TabsTrigger value="seminars">Seminar</TabsTrigger>
+                        <TabsTrigger value="competitions">
+                            Kompetisi
+                        </TabsTrigger>
+                    </TabsList>
+                    <Button size="sm" variant="success">
+                        <PlusCircle />
+                        &nbsp;Tambah
+                    </Button>
+                </TabsHeader>
                 <TabsContent value="competitions" className="space-y-4">
                     <List>
                         <ListHeader>
-                            <ListTitle>Daftar Kompetisi</ListTitle>
+                            <ListTitle>Data Kompetisi</ListTitle>
                         </ListHeader>
                         <ListContent>
                             {competitions.map((competition) => (
@@ -90,6 +108,15 @@ export default function EventIndex({
                                             </Badge>
                                         </span>
                                     </ListItemContent>
+
+                                    <ListItemDropdown>
+                                        <DropdownMenuItem>
+                                            Edit
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-danger focus:text-danger focus:bg-danger-foreground/50">
+                                            Hapus
+                                        </DropdownMenuItem>
+                                    </ListItemDropdown>
                                 </ListItem>
                             ))}
 
@@ -106,7 +133,7 @@ export default function EventIndex({
                 <TabsContent value="seminars" className="space-y-4">
                     <List>
                         <ListHeader>
-                            <ListTitle>Daftar Seminar</ListTitle>
+                            <ListTitle>Data Seminar</ListTitle>
                         </ListHeader>
                         <ListContent>
                             {seminars.map((seminar) => (
@@ -132,6 +159,15 @@ export default function EventIndex({
                                             )}
                                         </span>
                                     </ListItemContent>
+
+                                    <ListItemDropdown>
+                                        <DropdownMenuItem>
+                                            Edit
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-danger focus:text-danger focus:bg-danger-foreground/50">
+                                            Hapus
+                                        </DropdownMenuItem>
+                                    </ListItemDropdown>
                                 </ListItem>
                             ))}
 

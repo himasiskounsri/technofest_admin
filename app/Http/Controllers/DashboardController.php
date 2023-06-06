@@ -13,35 +13,40 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::with('eventRegistrations')
-            ->where('role', config('constants.user_role.participant'))
+
+        // TODO: Tolong direview lagi, ada kemungkinan keliru. Pangambilan users harus sesuai dengan periode festival saat ini
+        $participants_count = User::where('role', config('constants.user_role.participant'))
             ->where('festival_id', session('current_festival_id'))
-            ->withCount('eventRegistrations')
-            ->get();
-        // $registrations = EventRegistration::with(['event', 'eventRegistrationPayment'])->where('event.festival_id', session('current_festival_id'))->get();
-        // $paymentsCount = EventRegistrationPayment::where('eventRegistration.event.festival_id', session('current_festival_id'))->count();
-
-        $registrations = DB::table('event_registrations')
-            ->join('events', 'events.id', '=', 'event_id')
-            ->leftJoin('event_registration_payments', 'event_registrations.id', '=', 'event_registration_id')
-            ->where('events.festival_id', '=', session('current_festival_id'))
-            ->select('event_registrations.*', 'event_registration_payments.status')
-            ->get();
-
-        $paymentsCount = DB::table('event_registration_payments')
-            ->join('event_registrations', 'event_registration_id', '=', 'event_registrations.id')
-            ->join('events', 'event_registrations.event_id', '=', 'events.id')
-            ->where('events.festival_id', '=', session('current_festival_id'))
-            ->select("*")
             ->count();
+
+        $registrations_count = EventRegistration::whereRelation('event', 'festival_id', session('current_festival_id'))
+            ->count();
+
+        $payments_count = EventRegistrationPayment::whereRelation('eventRegistration.event', 'festival_id', session('current_festival_id'))
+            ->where('status', config('constants.payment_status.not_confirmed'))
+            ->count();
+
+        // DB::table('event_registrations')
+        //     ->join('events', 'events.id', '=', 'event_id')
+        //     ->leftJoin('event_registration_payments', 'event_registrations.id', '=', 'event_registration_id')
+        //     ->where('events.festival_id', '=', session('current_festival_id'))
+        //     ->select('event_registrations.*', 'event_registration_payments.status')
+        //     ->get();
+
+        // $payments_count = DB::table('event_registration_payments')
+        //     ->join('event_registrations', 'event_registration_id', '=', 'event_registrations.id')
+        //     ->join('events', 'event_registrations.event_id', '=', 'events.id')
+        //     ->where('events.festival_id', '=', session('current_festival_id'))
+        //     ->select("*")
+        //     ->count();
 
         // dd($registrations);
 
 
         return Inertia::render('_Dashboard', [
-            'users' => $users,
-            'eventRegistrations' => $registrations,
-            'paymentsCount' => $paymentsCount
+            'participants_count' => $participants_count,
+            'registrations_count' => $registrations_count,
+            'payments_count' => $payments_count
         ]);
     }
 }

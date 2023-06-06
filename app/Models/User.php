@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -80,8 +81,8 @@ class User extends Authenticatable
         return $this->hasMany(Faq::class);
     }
 
-    public function festival(): BelongsTo
+    public function festivals(): BelongsToMany
     {
-        return $this->belongsTo(Festival::class);
+        return $this->belongsToMany(Festival::class)->withTimestamps();
     }
 }

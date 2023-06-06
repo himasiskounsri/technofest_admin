@@ -10,11 +10,23 @@ import {
     ListItemContent,
     ListItemDescription,
     ListItemDescriptionItem,
+    ListItemDropdown,
     ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
 import { Badge } from "@/Components/Ui/Badge";
-import { User, Youtube } from "lucide-react";
+import { PlusCircle, User, Youtube } from "lucide-react";
+import {
+    DropdownMenuCheckboxItem,
+    DropdownMenuItem,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+} from "@/Components/Ui/DropdownMenu";
+import {
+    DropdownMenuArrow,
+    DropdownMenuItemIndicator,
+} from "@radix-ui/react-dropdown-menu";
+import { Button } from "@/Components/Ui/Button";
 
 export default function FaqIndex({ auth, faqs }: PageProps) {
     console.log(faqs);
@@ -25,9 +37,15 @@ export default function FaqIndex({ auth, faqs }: PageProps) {
                 title="Faq"
                 description="Kelola pertanyaan dan jawaban yang sering muncul."
             />
+            <div className="mb-4 flex justify-end">
+                <Button size="sm" variant="success">
+                    <PlusCircle />
+                    &nbsp;Tambah
+                </Button>
+            </div>
             <List className="max-w-3xl">
                 <ListHeader>
-                    <ListTitle>Daftar Faq</ListTitle>
+                    <ListTitle>Data Faq</ListTitle>
                 </ListHeader>
                 <ListContent>
                     {faqs.map((faq) => (
@@ -44,6 +62,13 @@ export default function FaqIndex({ auth, faqs }: PageProps) {
                                     <Badge>Highlighted</Badge>
                                 )}
                             </ListItemContent>
+
+                            <ListItemDropdown>
+                                <DropdownMenuItem>Edit</DropdownMenuItem>
+                                <DropdownMenuItem className="text-danger focus:text-danger focus:bg-danger-foreground/50">
+                                    Hapus
+                                </DropdownMenuItem>
+                            </ListItemDropdown>
                         </ListItem>
                     ))}
 

@@ -1,21 +1,13 @@
+import { Badge } from "@/Components/Ui/Badge";
 import { Separator } from "@/Components/Ui/Separator";
+import PeriodSwitcher from "@/Layouts/AuthenticatedLayout/PeriodSwitcher";
+import { activeFestival } from "@/lib/utils";
+import { User } from "@/types";
+import { CheckCheck } from "lucide-react";
 import { MainNav } from "./MainNav";
 import { UserNav } from "./UserNav";
-import { Festival, User } from "@/types";
-import PeriodSwitcher from "@/Layouts/AuthenticatedLayout/PeriodSwitcher";
-import { Badge } from "@/Components/Ui/Badge";
-import { usePage } from "@inertiajs/react";
-import { BadgeCheck, CheckCheck } from "lucide-react";
 
 export default function Header({ user }: { user: User }) {
-    const { festivals } = usePage().props as unknown as {
-        festivals: Festival[];
-    };
-
-    const activeFestival = festivals.filter(
-        (festival) => festival.is_active
-    )[0];
-
     return (
         <header className="border-b">
             <div className="flex h-16 items-center px-4">
@@ -30,7 +22,7 @@ export default function Header({ user }: { user: User }) {
                     >
                         <CheckCheck />
                         <span className="font-normal">
-                            Periode {activeFestival.period}
+                            Periode {activeFestival().period}
                         </span>
                         : Aktif
                     </Badge>

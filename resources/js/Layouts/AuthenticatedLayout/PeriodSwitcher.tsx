@@ -17,7 +17,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/Components/Ui/Popover";
-import { cn } from "@/lib/utils";
+import { cn, currentFestival } from "@/lib/utils";
 import { Festival } from "@/types";
 import { router, useForm, usePage } from "@inertiajs/react";
 
@@ -26,8 +26,7 @@ interface PeriodSwitcherProps {
 }
 
 export default function PeriodSwitcher({ className }: PeriodSwitcherProps) {
-    const { flash, festivals } = usePage().props as unknown as {
-        flash: { current_festival: Festival };
+    const { festivals } = usePage().props as unknown as {
         festivals: Festival[];
     };
 
@@ -50,7 +49,7 @@ export default function PeriodSwitcher({ className }: PeriodSwitcherProps) {
                     aria-label="Select a team"
                     className={cn("w-[200px] justify-between", className)}
                 >
-                    Periode {flash.current_festival.period}
+                    Periode {currentFestival().period}
                     <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -81,8 +80,7 @@ export default function PeriodSwitcher({ className }: PeriodSwitcherProps) {
                                     <Check
                                         className={cn(
                                             "ml-auto h-4 w-4",
-                                            flash.current_festival.id ===
-                                                festival.id
+                                            currentFestival().id === festival.id
                                                 ? "opacity-100"
                                                 : "opacity-0"
                                         )}

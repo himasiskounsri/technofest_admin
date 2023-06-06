@@ -8,6 +8,9 @@ export type PageProps<
     user: User;
     users: User[];
 
+    manager: User;
+    managers: User[];
+
     participant: User;
     participants: User[];
 
@@ -49,13 +52,15 @@ export interface User {
     uid: string;
     name: string;
     email: string;
-    email_verified_at: Date;
+    email_verified_at: string;
     role: number;
     event_registrations?: EventRegistration[];
     avatar: Avatar;
     event_registrant?: EventRegistrant;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
+
+    event_registrations_count?: number;
 }
 
 export interface Faq {
@@ -64,8 +69,8 @@ export interface Faq {
     answer: string;
     is_highlighted: boolean;
     user: User;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Festival {
@@ -77,8 +82,8 @@ export interface Festival {
     start_date: string;
     end_date: string;
     is_active: boolean;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface SeminarCast {
@@ -88,23 +93,23 @@ export interface SeminarCast {
     image?: string;
     role?: number;
     seminar: Seminar;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Seminar {
     id: string;
     event: Event;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Competition {
     id: string;
     event: Event;
     max_participants: number;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface ContactPerson {
@@ -115,19 +120,19 @@ export interface ContactPerson {
     instagram?: string;
     is_global: boolean;
     event?: Event;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Milestone {
     id: string;
     name: string;
-    date: Date;
+    date: string;
     description?: string;
     is_global: boolean;
     event?: Event;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface EventRegistrationPayment {
@@ -136,8 +141,8 @@ export interface EventRegistrationPayment {
     event_registration: EventRegistration;
     status: number;
     payment_proof?: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface EventRegistration {
@@ -147,8 +152,8 @@ export interface EventRegistration {
     event_registrant: EventRegistrant;
     name: string;
     event: Event;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Event {
@@ -160,9 +165,9 @@ export interface Event {
     is_opened: boolean;
     price?: number;
     held_in?: string;
-    held_on?: Date;
-    created_at: Date;
-    updated_at: Date;
+    held_on?: string;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface UserProfile {
@@ -174,15 +179,15 @@ export interface UserProfile {
     gender?: number;
     photo: string;
     user: User;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Avatar {
     id: string;
     image: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface EventRegistrant {
@@ -190,6 +195,6 @@ export interface EventRegistrant {
     role: number;
     user: User;
     event_registration: EventRegistration;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }

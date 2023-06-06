@@ -3,6 +3,8 @@ import { Head, usePage } from "@inertiajs/react";
 import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
+import { ToastProvider } from "@/Components/Ui/Toast";
+import { Toaster } from "@/Components/Ui/Toaster";
 
 interface Props {
     children: React.ReactNode;
@@ -32,6 +34,7 @@ export default function Authenticated({ children, title }: Props) {
                 {children}
             </main>
             <Footer />
+            <Toaster />
         </>
     );
 }
