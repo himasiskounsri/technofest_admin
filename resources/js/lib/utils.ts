@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 export function getFirstLetters(str: string) {
     const firstLetters = str
         .split(" ")
-        .map((word, index) => (index == 2 ? "" : word.charAt(0)))
+        .map((word, index) => (index >= 2 ? "" : word.charAt(0)))
         .join("");
 
     return firstLetters;
