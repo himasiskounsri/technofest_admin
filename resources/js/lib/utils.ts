@@ -3,11 +3,23 @@ import { usePage } from "@inertiajs/react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export function cn(...inputs: ClassValue[]) {
+/**
+ * Merge classNames from list of classNames
+ *
+ * @param {ClassValue[]} inputs List of classNames
+ * @returns {string} Merged classNames
+ */
+export function cn(...inputs: ClassValue[]): string {
     return twMerge(clsx(inputs));
 }
 
-export function getFirstLetters(str: string) {
+/**
+ * return the initial letter of each word from the given string.
+ *
+ * @param str String to convert
+ * @returns Converted string
+ */
+export function getFirstLetters(str: string): string {
     const firstLetters = str
         .split(" ")
         .map((word, index) => (index >= 2 ? "" : word.charAt(0)))
@@ -19,7 +31,7 @@ export function getFirstLetters(str: string) {
 export function formatDate(
     date: string,
     option: "date" | "time" | "datetime" = "date"
-) {
+): string {
     const new_date = new Date(date);
     const locale: Intl.LocalesArgument = "id-ID";
     const dateFormatOptions: Intl.DateTimeFormatOptions = {
