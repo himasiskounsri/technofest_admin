@@ -6,12 +6,15 @@ import { User } from "@/types";
 import { CheckCheck } from "lucide-react";
 import { MainNav } from "./MainNav";
 import { UserNav } from "./UserNav";
+import { Link } from "@inertiajs/react";
 
 export default function Header({ user }: { user: User }) {
     return (
         <header className="border-b">
             <div className="flex h-16 items-center px-4">
-                <p className="font-medium mr-4">Technofest Admin</p>
+                <Link href={route("dashboard")}>
+                    <p className="font-medium mr-4">Technofest Admin</p>
+                </Link>
                 <Separator orientation="vertical" className="h-12" />
                 <PeriodSwitcher className="ml-6" />
                 <MainNav className="ml-6" />

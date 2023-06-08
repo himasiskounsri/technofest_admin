@@ -58,10 +58,6 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                             Dikonfirmasi
                         </TabsTrigger>
                     </TabsList>
-                    <Button size="sm" variant="success">
-                        <PlusCircle />
-                        &nbsp;Tambah
-                    </Button>
                 </TabsHeader>
                 {payments_list.map((payments) => (
                     <TabsContent
