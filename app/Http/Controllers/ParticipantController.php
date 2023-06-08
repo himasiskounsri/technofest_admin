@@ -21,8 +21,6 @@ class ParticipantController extends Controller
 
     public function destroy($id)
     {
-        // dd($id);
-
         $participant = User::find($id);
         $participant->delete();
 

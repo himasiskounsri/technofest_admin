@@ -6,6 +6,7 @@ use App\Models\Faq;
 use App\Http\Requests\StoreFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class FaqController extends Controller
 {
@@ -67,8 +68,13 @@ class FaqController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Faq $faq)
+    public function destroy($id)
     {
-        //
+        $faq = User::find($id);
+        $faq->delete();
+
+        return redirect()
+            ->route('faqs.index')
+            ->with('message', "Faq <b>" . Str::limit($faq->question, 20) . "</b> berhasil dihapus");
     }
 }

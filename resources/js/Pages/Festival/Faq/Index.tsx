@@ -27,10 +27,25 @@ import {
     DropdownMenuItemIndicator,
 } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/Components/Ui/Button";
+import { useToast } from "@/Components/Ui/use-toast";
+import { usePage, router } from "@inertiajs/react";
+import { useEffect } from "react";
 
 export default function FaqIndex({ auth, faqs }: PageProps) {
     console.log(faqs);
 
+    const { toast } = useToast();
+    const { flash }: any = usePage().props;
+
+    useEffect(() => {
+        if (flash.message) {
+            toast({
+                description: flash.message,
+                variant: "success",
+            });
+        }
+    }, [flash]);
+    
     return (
         <FestivalLayout>
             <SectionTitle
@@ -65,7 +80,16 @@ export default function FaqIndex({ auth, faqs }: PageProps) {
 
                             <ListItemDropdown>
                                 <DropdownMenuItem>Edit</DropdownMenuItem>
-                                <DropdownMenuItem className="text-danger focus:text-danger focus:bg-danger-foreground/50">
+                                <DropdownMenuItem                                     
+                                onClick={() => {
+                                        router.delete(
+                                            route("faqs.destroy", {
+                                                id: faq.id,
+                                            }),
+                                            { preserveScroll: true }
+                                        );
+                                    }} 
+                                    className="text-danger focus:text-danger focus:bg-danger-foreground/50">
                                     Hapus
                                 </DropdownMenuItem>
                             </ListItemDropdown>
