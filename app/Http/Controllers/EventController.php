@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateEventRequest;
 use App\Models\Competition;
 use App\Models\Seminar;
 use Inertia\Inertia;
+use Symfony\Component\Uid\Ulid;
 
 class EventController extends Controller
 {
@@ -16,17 +17,12 @@ class EventController extends Controller
      */
     public function index()
     {
-        $competitions = Competition::with(['event:id,name,description,is_opened'])
-            ->whereRelation('event', 'festival_id', session('current_festival_id'))
-            ->get();
-
-        $seminars = Seminar::with(['event'])
-            ->whereRelation('event', 'festival_id', session('current_festival_id'))
+        $events = Event::with(['competition', 'seminar', 'seminar.seminarCasts'])
+            ->where('festival_id', session('current_festival_id'))
             ->get();
 
         return Inertia::render('Festival/Event/Index', [
-            'competitions' => $competitions,
-            'seminars' => $seminars
+            'events' => $events,
         ]);
     }
 
@@ -49,9 +45,17 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(string $id)
     {
-        //
+        $event = Event::with(['competition', 'seminar', 'seminar.seminarCasts'])
+            ->withCount('eventRegistrations')
+            ->find($id);
+
+        if (!$event) {
+            return to_route('events.index');
+        }
+
+        return Inertia::render('Festival/Event/Show', ['event' => $event]);
     }
 
     /**

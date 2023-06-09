@@ -72,3 +72,7 @@ export function activeFestival(): Festival {
 
     return festivals.filter((festival: Festival) => festival.is_active)[0];
 }
+
+export default function formatPrice(price: number): string {
+    return `Rp${price.toLocaleString("id-ID")}`;
+}

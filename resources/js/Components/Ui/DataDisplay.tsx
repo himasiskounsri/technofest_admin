@@ -55,7 +55,7 @@ export const DataDisplayContent = ({ children }: DataDisplayContentProps) => {
 };
 
 interface DataDisplayItemProps {
-    keyName: string;
+    keyName: React.ReactNode;
     children: React.ReactNode;
 }
 

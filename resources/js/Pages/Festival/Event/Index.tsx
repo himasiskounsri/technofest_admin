@@ -35,12 +35,17 @@ import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
 import { Button } from "@/Components/Ui/Button";
 import { PlusCircle } from "lucide-react";
 
-export default function EventIndex({
-    auth,
-    competitions,
-    seminars,
-}: PageProps) {
+export default function EventIndex({ auth, events }: PageProps) {
     const { constants }: any = usePage().props;
+
+    console.log(events);
+
+    const competitions = events.filter(
+        (event) => event.type == constants.event_type.competition
+    );
+    const seminars = events.filter(
+        (event) => event.type == constants.event_type.seminar
+    );
 
     return (
         <FestivalLayout>
@@ -71,7 +76,7 @@ export default function EventIndex({
                         </ListHeader>
                         <ListContent>
                             {competitions.map((competition) => (
-                                <ListItem>
+                                <ListItem key={competition.id}>
                                     <ListItemTitle>
                                         <Link
                                             href={route(
@@ -81,17 +86,17 @@ export default function EventIndex({
                                             method="get"
                                             className="hover:underline"
                                         >
-                                            {competition.event.name}
+                                            {competition.name}
                                         </Link>
                                     </ListItemTitle>
                                     <ListItemDescription>
-                                        {competition.event.description || (
+                                        {competition.description || (
                                             <ListItemDescriptionItem value="Tanpa deskripsi" />
                                         )}
                                     </ListItemDescription>
                                     <ListItemContent>
                                         <span>
-                                            {competition.event.is_opened ? (
+                                            {competition.is_opened ? (
                                                 <Badge variant="success">
                                                     Buka
                                                 </Badge>
@@ -103,14 +108,16 @@ export default function EventIndex({
                                         </span>
                                         <span>
                                             <Badge>
-                                                {competition.max_participants ==
-                                                1 ? (
+                                                {competition.competition
+                                                    .max_participants == 1 ? (
                                                     <span>Individual</span>
                                                 ) : (
                                                     <span>
                                                         Maks peserta:{" "}
                                                         {
-                                                            competition.max_participants
+                                                            competition
+                                                                .competition
+                                                                .max_participants
                                                         }
                                                     </span>
                                                 )}
@@ -146,7 +153,7 @@ export default function EventIndex({
                         </ListHeader>
                         <ListContent>
                             {seminars.map((seminar) => (
-                                <ListItem>
+                                <ListItem key={seminar.id}>
                                     <ListItemTitle>
                                         <Link
                                             href={route(
@@ -156,17 +163,17 @@ export default function EventIndex({
                                             method="get"
                                             className="hover:underline"
                                         >
-                                            {seminar.event.name}
+                                            {seminar.name}
                                         </Link>
                                     </ListItemTitle>
                                     <ListItemDescription>
-                                        {seminar.event.description || (
+                                        {seminar.description || (
                                             <ListItemDescriptionItem value="Tanpa deskripsi" />
                                         )}
                                     </ListItemDescription>
                                     <ListItemContent>
                                         <span>
-                                            {seminar.event.is_opened ? (
+                                            {seminar.is_opened ? (
                                                 <Badge variant="success">
                                                     Buka
                                                 </Badge>

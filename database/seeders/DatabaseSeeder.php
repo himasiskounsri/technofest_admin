@@ -118,14 +118,14 @@ class DatabaseSeeder extends Seeder
                 EventRegistration::factory()
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
-                // ->hasAttached(
-                //     $participants->random(3),
-                //     ["role" => 2]
-                // )
-                // ->hasAttached(
-                //     $participants->random(1),
-                //     ["role" => 1]
-                // )
+                    ->hasAttached(
+                        $participants->random(3),
+                        ["role" => 2]
+                    )
+                    ->hasAttached(
+                        $participants->random(),
+                        ["role" => 1]
+                    )
             )
             ->hasCompetition(1, [
                 'max_participants' => 4
@@ -145,14 +145,14 @@ class DatabaseSeeder extends Seeder
                 EventRegistration::factory()
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
-                // ->hasAttached(
-                //     $participants->random(3),
-                //     ["role" => 2]
-                // )
-                // ->hasAttached(
-                //     $participants->random(1),
-                //     ["role" => 1]
-                // )
+                    ->hasAttached(
+                        $participants->random(3),
+                        ["role" => 2]
+                    )
+                    ->hasAttached(
+                        $participants->random(),
+                        ["role" => 1]
+                    )
             )
             ->hasCompetition(1, [
                 'max_participants' => 4
@@ -172,10 +172,10 @@ class DatabaseSeeder extends Seeder
                 EventRegistration::factory()
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
-                // ->hasAttached(
-                //     $participants->random(1),
-                //     ["role" => 0]
-                // )
+                    ->hasAttached(
+                        $participants->random(),
+                        ["role" => 0]
+                    )
             )
             ->hasCompetition(1, [
                 'max_participants' => 1
@@ -195,10 +195,10 @@ class DatabaseSeeder extends Seeder
                 EventRegistration::factory()
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
-                // ->hasAttached(
-                //     $participants->random(1),
-                //     ["role" => 0]
-                // )
+                    ->hasAttached(
+                        $participants->random(),
+                        ["role" => 0]
+                    )
             )
             ->hasCompetition(1, [
                 'max_participants' => 1
@@ -214,24 +214,21 @@ class DatabaseSeeder extends Seeder
         $event_seminar = Event::factory()
             ->hasContactPersons(4)
             ->hasMilestones(4)
+            ->for($festival)
             ->has(
                 EventRegistration::factory()
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
-                        $participants[0],
+                        $participants->random(),
                         ["role" => 0]
                     )
             )
-            ->hasCompetition(1, [
-                'max_participants' => 1
-            ])
-            ->for($festival)
             ->create([
                 'name' => 'Seminar',
                 'type' => config('constants.event_type.seminar'),
                 'is_opened' => false,
-                'price' => 90000
+                'price' => 40000
             ]);
 
         $seminar = Seminar::factory()

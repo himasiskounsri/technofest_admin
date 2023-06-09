@@ -1,21 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/Ui/Avatar";
 import { Button } from "@/Components/Ui/Button";
-import {
-    List,
-    ListContent,
-    ListHeader,
-    ListItem,
-    ListItemTitle,
-    ListTitle,
-} from "@/Components/Ui/List";
-import { useToast } from "@/Components/Ui/use-toast";
-import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
-import { formatDate, getFirstLetters } from "@/lib/utils";
-import { PageProps } from "@/types";
-import { usePage } from "@inertiajs/react";
-import { MoveLeft, Paperclip } from "lucide-react";
-import { useEffect } from "react";
-import FestivalLayout from "../Layout";
+import { Card, CardHeader, CardTitle } from "@/Components/Ui/Card";
 import {
     DataDisplay,
     DataDisplayContent,
@@ -23,6 +8,21 @@ import {
     DataDisplayItem,
     DataDisplayTitle,
 } from "@/Components/Ui/DataDisplay";
+import {
+    List,
+    ListContent,
+    ListHeader,
+    ListItem,
+    ListTitle,
+} from "@/Components/Ui/List";
+import { useToast } from "@/Components/Ui/use-toast";
+import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
+import { formatDate, getFirstLetters } from "@/lib/utils";
+import { PageProps } from "@/types";
+import { usePage } from "@inertiajs/react";
+import { MoveLeft } from "lucide-react";
+import { useEffect } from "react";
+import FestivalLayout from "../Layout";
 
 export default function ParticipantShow({ auth, participant }: PageProps) {
     const { toast } = useToast();
@@ -133,13 +133,22 @@ export default function ParticipantShow({ auth, participant }: PageProps) {
                                 </DataDisplayTitle>
                             </DataDisplayHeader>
                             <DataDisplayContent>
-                                {/* <DataDisplayItem keyName="Kompetisi"> */}
-                                {participant.event_registrations.map(
-                                    (eventRegistration) => (
-                                        <div>{eventRegistration.name}</div>
-                                    )
-                                )}
-                                {/* </DataDisplayItem> */}
+                                <div className="space-y-2">
+                                    {participant.event_registrations.map(
+                                        (eventRegistration) => (
+                                            <Card key={eventRegistration.id}>
+                                                <CardHeader>
+                                                    <CardTitle>
+                                                        {
+                                                            eventRegistration
+                                                                .event.name
+                                                        }
+                                                    </CardTitle>
+                                                </CardHeader>
+                                            </Card>
+                                        )
+                                    )}
+                                </div>
                             </DataDisplayContent>
                         </DataDisplay>
                     </ListItem>

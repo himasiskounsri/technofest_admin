@@ -24,7 +24,7 @@ class ParticipantController extends Controller
 
     public function show(string $id)
     {
-        $participant = User::with(['avatar:id,image', 'userProfile', 'eventRegistrations'])
+        $participant = User::with(['avatar:id,image', 'userProfile', 'eventRegistrations', 'eventRegistrations.event'])
             ->find($id);
 
         if (!$participant) {

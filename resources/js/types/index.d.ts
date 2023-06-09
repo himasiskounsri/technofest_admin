@@ -101,6 +101,7 @@ export interface SeminarCast {
 export interface Seminar {
     id: string;
     event: Event;
+    seminar_casts: SeminarCast[];
     created_at: string;
     updated_at: string;
 }
@@ -167,8 +168,12 @@ export interface Event {
     price: number;
     held_in: string;
     held_on: string;
+    competition: Competition;
+    seminar: Seminar;
     created_at: string;
     updated_at: string;
+
+    event_registrations_count: number;
 }
 
 export interface UserProfile {

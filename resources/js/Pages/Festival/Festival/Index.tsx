@@ -7,8 +7,12 @@ import {
     CardTitle,
 } from "@/Components/Ui/Card";
 import { Badge } from "@/Components/Ui/Badge";
+import { PageProps } from "@/types";
+import { usePage } from "@inertiajs/react";
+import { currentFestival } from "@/lib/utils";
+import { log } from "console";
 
-export default function FestivalIndex({ auth, festivals }) {
+export default function FestivalIndex({ auth, festivals }: PageProps) {
     return (
         <FestivalLayout>
             <SectionTitle
@@ -24,6 +28,22 @@ export default function FestivalIndex({ auth, festivals }) {
                     <CardDescription>Periode festival saat ini</CardDescription>
                 </CardHeader>
             </Card>
+            <SectionTitle
+                title="Narahubung"
+                description="Kelola narahubung Festival."
+            />
+            <SectionTitle
+                title="Linimasa"
+                description="Kelola linimasa Festival."
+            />
+            <SectionTitle
+                title="Sponsor"
+                description="Kelola sponsor Festival."
+            />
+            <SectionTitle
+                title="Media Partner"
+                description="Kelola media partner Festival."
+            />
         </FestivalLayout>
     );
 }

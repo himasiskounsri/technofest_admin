@@ -24,6 +24,7 @@ import { Flag, PlusCircle, Wallet } from "lucide-react";
 import FestivalLayout from "../Layout";
 import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
 import { Button } from "@/Components/Ui/Button";
+import formatPrice from "@/lib/utils";
 
 export default function PaymentIndex({ auth, payments }: PageProps) {
     const { constants }: any = usePage().props;
@@ -95,11 +96,10 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                                             />
                                             <ListItemDescriptionItem
                                                 icon={Wallet}
-                                                value={`Rp${
-                                                    payment.event_registration.event.price.toLocaleString(
-                                                        "id-ID"
-                                                    ) || 0
-                                                }`}
+                                                value={formatPrice(
+                                                    payment.event_registration
+                                                        .event.price
+                                                )}
                                             />
                                         </ListItemDescription>
                                         <div className="flex space-x-1 items-center mt-1">
