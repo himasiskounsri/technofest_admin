@@ -22,7 +22,16 @@ return new class extends Migration
             $table->rememberToken();
             $table->ulid('selected_festival')->nullable();
             $table->ulid('avatar_id')->nullable()->constrained()->nullOnDelete();
-            $table->ulid('festival_id')->nullable()->constraint()->cascadeOnDelete();
+
+            /*
+             * Digunakan untuk acuan festival di mana user ditempatkan.
+             * Acuan ini hanya digunakan oleh user dengan role manager (1) dan participant (2).
+             * Null apabila user dengan role admin (0).
+             *
+             * column: festival_id
+             * nullable
+             */
+            // $table->ulid('festival_id')->nullable()->constraint()->cascadeOnDelete();
             $table->timestamps();
         });
     }

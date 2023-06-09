@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,13 +11,27 @@ class ParticipantController extends Controller
 {
     public function index()
     {
-        $participants = User::with(['avatar:id,image'])
+        $participants = User::with(['avatar:id,image', 'userProfile'])
             ->where('role', config('constants.user_role.participant'))
-            ->where('festival_id', session('current_festival_id'))
+            ->whereHas('festivals', function (Builder $query) {
+                $query->where('festival_id', session('current_festival_id'));
+            })
             ->withCount('eventRegistrations')
             ->get();
 
         return Inertia::render('Festival/Participant/Index', ['participants' => $participants]);
+    }
+
+    public function show(string $id)
+    {
+        $participant = User::with(['avatar:id,image', 'userProfile', 'eventRegistrations'])
+            ->find($id);
+
+        if (!$participant) {
+            return to_route('participants.index');
+        }
+
+        return Inertia::render('Festival/Participant/Show', ['participant' => $participant]);
     }
 
     public function destroy($id)

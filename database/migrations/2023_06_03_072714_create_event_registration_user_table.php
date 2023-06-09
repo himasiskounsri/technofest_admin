@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('event_registration_user', function (Blueprint $table) {
-            $table->ulid('id')->primary();
             $table->unsignedTinyInteger('role');
             $table->ulid('user_id')->constrained()->cascadeOnDelete();
             $table->ulid('event_registration_id')->constrained()->cascadeOnDelete();

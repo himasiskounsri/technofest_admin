@@ -53,12 +53,21 @@ export function ListContent({ children }: ListContentProps) {
 interface ListItemProps {
     children: React.ReactNode;
     className?: string;
+    hover?: boolean;
 }
 
-export function ListItem({ children, className }: ListItemProps) {
+export function ListItem({
+    children,
+    className,
+    hover = false,
+}: ListItemProps) {
     return (
         <CardContent
-            className={cn("p-4 relative hover:bg-secondary/50", className)}
+            className={cn(
+                "p-4 relative",
+                hover && "hover:bg-secondary/50",
+                className
+            )}
         >
             {children}
         </CardContent>

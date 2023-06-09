@@ -17,7 +17,9 @@ class FaqFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'question' => substr(fake()->sentence(), 0, -1) . "?",
+            'answer' => fake()->paragraph(),
+            'is_highlighted' => fake()->boolean(10),
         ];
     }
 }

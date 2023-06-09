@@ -30,7 +30,6 @@ class FaqController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -44,9 +43,16 @@ class FaqController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Faq $faq)
+    public function show(string $id)
     {
-        //
+        $faq = Faq::with(['user:id,name'])
+            ->find($id);
+
+        if (!$faq) {
+            return to_route('faqs.index');
+        }
+
+        return Inertia::render('Festival/Faq/Show', ['faq' => $faq]);
     }
 
     /**
@@ -70,7 +76,7 @@ class FaqController extends Controller
      */
     public function destroy($id)
     {
-        $faq = User::find($id);
+        $faq = Faq::find($id);
         $faq->delete();
 
         return redirect()

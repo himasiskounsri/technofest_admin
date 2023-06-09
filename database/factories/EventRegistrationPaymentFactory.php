@@ -17,7 +17,8 @@ class EventRegistrationPaymentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'status' => fake()->numberBetween(0, 2),
+            'payment_proof' => fake()->imageUrl(640, 480, 'animals', true),
         ];
     }
 }

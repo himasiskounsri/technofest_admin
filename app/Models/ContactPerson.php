@@ -11,6 +11,8 @@ class ContactPerson extends Model
 {
     use HasFactory, HasUlids;
 
+    protected $table = 'contact_persons';
+
     protected $fillable = [
         'name',
         'whatsapp',

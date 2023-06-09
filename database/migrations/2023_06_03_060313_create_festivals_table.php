@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('theme')->nullable();
             $table->string('logo')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('is_active')->default(false);

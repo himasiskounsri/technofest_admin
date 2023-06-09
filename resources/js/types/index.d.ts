@@ -30,7 +30,7 @@ export type PageProps<
     milestones: Milestone[];
 
     contactPerson: ContactPerson;
-    contactPeople: ContactPerson[];
+    contactPersons: ContactPerson[];
 
     competition: Competition;
     competitions: Competition[];
@@ -54,13 +54,14 @@ export interface User {
     email: string;
     email_verified_at: string;
     role: number;
-    event_registrations?: EventRegistration[];
+    event_registrations: EventRegistration[];
     avatar: Avatar;
-    event_registrant?: EventRegistrant;
+    user_profile: UserProfile;
+    event_registrant: EventRegistrant;
     created_at: string;
     updated_at: string;
 
-    event_registrations_count?: number;
+    event_registrations_count: number;
 }
 
 export interface Faq {
@@ -77,8 +78,8 @@ export interface Festival {
     id: string;
     period: string;
     name: string;
-    theme?: string;
-    description?: string;
+    theme: string;
+    description: string;
     start_date: string;
     end_date: string;
     is_active: boolean;
@@ -89,9 +90,9 @@ export interface Festival {
 export interface SeminarCast {
     id: string;
     name: string;
-    title?: string;
-    image?: string;
-    role?: number;
+    title: string;
+    image: string;
+    role: number;
     seminar: Seminar;
     created_at: string;
     updated_at: string;
@@ -115,11 +116,11 @@ export interface Competition {
 export interface ContactPerson {
     id: string;
     name: string;
-    whatsapp?: string;
-    line?: string;
-    instagram?: string;
+    whatsapp: string;
+    line: string;
+    instagram: string;
     is_global: boolean;
-    event?: Event;
+    event: Event;
     created_at: string;
     updated_at: string;
 }
@@ -128,9 +129,9 @@ export interface Milestone {
     id: string;
     name: string;
     date: string;
-    description?: string;
+    description: string;
     is_global: boolean;
-    event?: Event;
+    event: Event;
     created_at: string;
     updated_at: string;
 }
@@ -140,7 +141,7 @@ export interface EventRegistrationPayment {
     uid: string;
     event_registration: EventRegistration;
     status: number;
-    payment_proof?: string;
+    payment_proof: string;
     created_at: string;
     updated_at: string;
 }
@@ -160,25 +161,26 @@ export interface Event {
     id: string;
     name: string;
     type: number;
-    description?: string;
-    image?: string;
+    description: string;
+    image: string;
     is_opened: boolean;
-    price?: number;
-    held_in?: string;
-    held_on?: string;
+    price: number;
+    held_in: string;
+    held_on: string;
     created_at: string;
     updated_at: string;
 }
 
 export interface UserProfile {
     id: string;
-    whatsapp?: string;
-    line?: string;
-    instagram?: string;
-    institution?: string;
-    gender?: number;
+    whatsapp: string;
+    line: string;
+    instagram: string;
+    institution: string;
+    gender: number;
     photo: string;
     user: User;
+    student_id_number: string;
     created_at: string;
     updated_at: string;
 }

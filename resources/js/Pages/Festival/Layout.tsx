@@ -16,37 +16,37 @@ export default function FestivalLayout({ children }: Props) {
                         <SidebarNavLink
                             href={route("festivals.index")}
                             method="get"
-                            active={route().current("festivals.index")}
+                            active={route().current("festivals.*")}
                             value="Festival"
                         />
                         <SidebarNavLink
                             href={route("events.index")}
                             method="get"
-                            active={route().current("events.index")}
+                            active={route().current("events.*")}
                             value="Event"
                         />
                         <SidebarNavLink
                             href={route("registrations.index")}
                             method="get"
-                            active={route().current("registrations.index")}
+                            active={route().current("registrations.*")}
                             value="Pendaftaran"
                         />
                         <SidebarNavLink
                             href={route("participants.index")}
                             method="get"
-                            active={route().current("participants.index")}
+                            active={route().current("participants.*")}
                             value="Partisipan"
                         />
                         <SidebarNavLink
                             href={route("payments.index")}
                             method="get"
-                            active={route().current("payments.index")}
+                            active={route().current("payments.*")}
                             value="Pembayaran"
                         />
                         <SidebarNavLink
                             href={route("faqs.index")}
                             method="get"
-                            active={route().current("faqs.index")}
+                            active={route().current("faqs.*")}
                             value="Faqs"
                         />
                     </>

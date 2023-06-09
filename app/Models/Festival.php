@@ -40,7 +40,7 @@ class Festival extends Model
         return $this->hasMany(Milestone::class);
     }
 
-    public function contactPeople(): HasMany
+    public function contactPersons(): HasMany
     {
         return $this->hasMany(ContactPerson::class);
     }

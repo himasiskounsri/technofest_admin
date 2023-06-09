@@ -15,7 +15,7 @@ import {
     ListTitle,
 } from "@/Components/Ui/List";
 import { Badge } from "@/Components/Ui/Badge";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { Flag, Users } from "lucide-react";
 import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
 
@@ -23,19 +23,20 @@ export default function RegistrationIndex({ auth, registrations }: PageProps) {
     const { constants }: any = usePage().props;
 
     const registrationCompetitions = registrations.filter(
-        (registrations) =>
-            registrations.event.type == constants.event_type.competition
-    );
-    const registrationSeminars = registrations.filter(
         (registration) =>
-            registration.event.type != constants.event_type.seminar
+            registration.event.type == constants.event_type.competition
     );
+    const registrationSeminars = registrations.filter((registration) => {
+        return registration.event.type == constants.event_type.seminar;
+    });
 
     const registration_list = [
         { name: "all", items: registrations },
         { name: "competitions", items: registrationCompetitions },
         { name: "seminars", items: registrationSeminars },
     ];
+
+    console.log(registration_list);
 
     return (
         <FestivalLayout>
@@ -51,6 +52,7 @@ export default function RegistrationIndex({ auth, registrations }: PageProps) {
                 </TabsList>
                 {registration_list.map((registrations) => (
                     <TabsContent
+                        key={registrations.name}
                         value={registrations.name}
                         className="space-y-4"
                     >
@@ -60,11 +62,20 @@ export default function RegistrationIndex({ auth, registrations }: PageProps) {
                             </ListHeader>
                             <ListContent>
                                 {registrations.items.map((registration) => (
-                                    <ListItem>
+                                    <ListItem key={registration.id}>
                                         <ListItemTitle>
-                                            ID:&nbsp;{registration.uid}
-                                            {registration.name &&
-                                                ` | ${registration.name}`}
+                                            <Link
+                                                href={route(
+                                                    "registrations.show",
+                                                    registration.id
+                                                )}
+                                                method="get"
+                                                className="hover:underline"
+                                            >
+                                                ID:&nbsp;{registration.uid}
+                                                {registration.name &&
+                                                    ` | ${registration.name}`}
+                                            </Link>
                                         </ListItemTitle>
                                         <ListItemDescription>
                                             <ListItemDescriptionItem

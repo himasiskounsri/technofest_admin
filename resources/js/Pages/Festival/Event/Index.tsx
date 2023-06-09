@@ -15,7 +15,7 @@ import {
 } from "@/Components/Ui/Tabs";
 import Authenticated from "@/Layouts/AuthenticatedLayout/Layout";
 import { PageProps } from "@/types";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import FestivalLayout from "../Layout";
 import { Separator } from "@/Components/Ui/Separator";
 import {
@@ -73,7 +73,16 @@ export default function EventIndex({
                             {competitions.map((competition) => (
                                 <ListItem>
                                     <ListItemTitle>
-                                        {competition.event.name}
+                                        <Link
+                                            href={route(
+                                                "events.show",
+                                                competition.id
+                                            )}
+                                            method="get"
+                                            className="hover:underline"
+                                        >
+                                            {competition.event.name}
+                                        </Link>
                                     </ListItemTitle>
                                     <ListItemDescription>
                                         {competition.event.description || (
@@ -139,7 +148,16 @@ export default function EventIndex({
                             {seminars.map((seminar) => (
                                 <ListItem>
                                     <ListItemTitle>
-                                        {seminar.event.name}
+                                        <Link
+                                            href={route(
+                                                "events.show",
+                                                seminar.id
+                                            )}
+                                            method="get"
+                                            className="hover:underline"
+                                        >
+                                            {seminar.event.name}
+                                        </Link>
                                     </ListItemTitle>
                                     <ListItemDescription>
                                         {seminar.event.description || (

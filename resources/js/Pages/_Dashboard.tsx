@@ -10,7 +10,6 @@ import {
 import { Separator } from "@/Components/Ui/Separator";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout/Layout";
 import { currentFestival, formatDate } from "@/lib/utils";
-import { PageProps } from "@/types";
 import { Link } from "@inertiajs/react";
 import { CalendarDays, CreditCard, Users } from "lucide-react";
 

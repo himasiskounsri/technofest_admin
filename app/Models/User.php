@@ -33,7 +33,6 @@ class User extends Authenticatable
         'role',
         'selected_festival',
         'avatar_id',
-        'festival_id'
     ];
 
     /**

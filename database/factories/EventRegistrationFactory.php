@@ -19,7 +19,7 @@ class EventRegistrationFactory extends Factory
     {
         return [
             'uid' => nanoUid(),
-            'event_id' => Event::select('id')->inRandomOrder()->first()->id,
+            // 'event_id' => Event::select('id')->inRandomOrder()->first()->id,
         ];
     }
 }

@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('festival_user', function (Blueprint $table) {
-            $table->id();
             $table->ulid('user_id')->constrained()->cascadeOnDelete();
             $table->ulid('festival_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

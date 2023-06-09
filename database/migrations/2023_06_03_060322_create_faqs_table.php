@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('faqs', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('question')->unique();
-            $table->string('answer');
+            $table->text('answer');
             $table->boolean('is_highlighted')->default(false);
             $table->foreignUlid('created_by')->nullable()->references('id')->on('users')->constraint()->nullOnDelete();
             $table->foreignUlid('festival_id')->constraint()->cascadeOnDelete();

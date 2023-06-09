@@ -16,12 +16,22 @@ import { useToast } from "@/Components/Ui/use-toast";
 import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
 import { formatDate, getFirstLetters } from "@/lib/utils";
 import { PageProps } from "@/types";
-import { router, usePage } from "@inertiajs/react";
-import { Clock, Fan, Terminal } from "lucide-react";
+import { Link, router, usePage } from "@inertiajs/react";
+import { Clock, Fan, Fingerprint, Terminal } from "lucide-react";
 import { useEffect } from "react";
 import FestivalLayout from "../Layout";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/Components/Ui/Dialog";
 
-export default function FestivalIndex({ auth, participants }: PageProps) {
+export default function ParticipantIndex({ auth, participants }: PageProps) {
+    console.log(participants[0]);
+
     const { toast } = useToast();
     const { flash }: any = usePage().props;
 
@@ -45,38 +55,53 @@ export default function FestivalIndex({ auth, participants }: PageProps) {
                     <ListTitle>Data Partisipan</ListTitle>
                 </ListHeader>
                 <ListContent>
-                    {participants.map((participan) => (
+                    {participants.map((participant) => (
                         <ListItem
-                            key={participan.id}
+                            key={participant.id}
                             className="flex items-center space-x-2"
                         >
                             <div>
                                 <Avatar className="h-8 w-8 rounded-full">
                                     <AvatarImage
                                         className="bg-slate-200"
-                                        src={participan.avatar.image}
-                                        alt={participan.name}
+                                        src={participant.avatar.image}
+                                        alt={participant.name}
                                     />
                                     <AvatarFallback>
                                         {getFirstLetters(
-                                            participan.name
+                                            participant.name
                                         ).toUpperCase()}
                                     </AvatarFallback>
                                 </Avatar>
                             </div>
                             <div>
-                                <ListItemTitle>{participan.name}</ListItemTitle>
+                                <ListItemTitle>
+                                    <Link
+                                        href={route(
+                                            "participants.show",
+                                            participant.id
+                                        )}
+                                        method="get"
+                                        className="hover:underline"
+                                    >
+                                        {participant.name}
+                                    </Link>
+                                </ListItemTitle>
                                 <ListItemDescription>
                                     <ListItemDescriptionItem
-                                        icon={Fan}
-                                        value={`${participan.event_registrations_count} event diikuti`}
+                                        icon={Fingerprint}
+                                        value={`NIM/NISN: ${participant.user_profile.student_id_number}`}
                                     />
                                     <ListItemDescriptionItem
+                                        icon={Fan}
+                                        value={`${participant.event_registrations_count} event`}
+                                    />
+                                    {/* <ListItemDescriptionItem
                                         icon={Clock}
                                         value={`Bergabung: ${formatDate(
                                             participan.created_at
                                         )}`}
-                                    />
+                                    /> */}
                                 </ListItemDescription>
                             </div>
 
@@ -90,7 +115,7 @@ export default function FestivalIndex({ auth, participants }: PageProps) {
                                     onClick={() => {
                                         router.delete(
                                             route("participants.destroy", {
-                                                id: participan.id,
+                                                id: participant.id,
                                             }),
                                             { preserveScroll: true }
                                         );

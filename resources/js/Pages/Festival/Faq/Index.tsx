@@ -1,7 +1,6 @@
-import Authenticated from "@/Layouts/AuthenticatedLayout/Layout";
-import { PageProps } from "@/types";
-import FestivalLayout from "../Layout";
-import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
+import { Badge } from "@/Components/Ui/Badge";
+import { Button } from "@/Components/Ui/Button";
+import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
 import {
     List,
     ListContent,
@@ -14,26 +13,15 @@ import {
     ListItemTitle,
     ListTitle,
 } from "@/Components/Ui/List";
-import { Badge } from "@/Components/Ui/Badge";
-import { PlusCircle, User, Youtube } from "lucide-react";
-import {
-    DropdownMenuCheckboxItem,
-    DropdownMenuItem,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
-} from "@/Components/Ui/DropdownMenu";
-import {
-    DropdownMenuArrow,
-    DropdownMenuItemIndicator,
-} from "@radix-ui/react-dropdown-menu";
-import { Button } from "@/Components/Ui/Button";
 import { useToast } from "@/Components/Ui/use-toast";
-import { usePage, router } from "@inertiajs/react";
+import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
+import { PageProps } from "@/types";
+import { Link, router, usePage } from "@inertiajs/react";
+import { PlusCircle, User } from "lucide-react";
 import { useEffect } from "react";
+import FestivalLayout from "../Layout";
 
 export default function FaqIndex({ auth, faqs }: PageProps) {
-    console.log(faqs);
-
     const { toast } = useToast();
     const { flash }: any = usePage().props;
 
@@ -45,11 +33,11 @@ export default function FaqIndex({ auth, faqs }: PageProps) {
             });
         }
     }, [flash]);
-    
+
     return (
         <FestivalLayout>
             <SectionTitle
-                title="Faq"
+                title="Faqs"
                 description="Kelola pertanyaan dan jawaban yang sering muncul."
             />
             <div className="mb-4 flex justify-end">
@@ -60,12 +48,20 @@ export default function FaqIndex({ auth, faqs }: PageProps) {
             </div>
             <List className="max-w-3xl">
                 <ListHeader>
-                    <ListTitle>Data Faq</ListTitle>
+                    <ListTitle>Data Faqs</ListTitle>
                 </ListHeader>
                 <ListContent>
                     {faqs.map((faq) => (
-                        <ListItem>
-                            <ListItemTitle>{faq.question}</ListItemTitle>
+                        <ListItem key={faq.id}>
+                            <ListItemTitle>
+                                <Link
+                                    href={route("faqs.show", faq.id)}
+                                    method="get"
+                                    className="hover:underline"
+                                >
+                                    {faq.question}
+                                </Link>
+                            </ListItemTitle>
                             <ListItemDescription>
                                 <ListItemDescriptionItem
                                     icon={User}
@@ -80,16 +76,17 @@ export default function FaqIndex({ auth, faqs }: PageProps) {
 
                             <ListItemDropdown>
                                 <DropdownMenuItem>Edit</DropdownMenuItem>
-                                <DropdownMenuItem                                     
-                                onClick={() => {
+                                <DropdownMenuItem
+                                    onClick={() => {
                                         router.delete(
                                             route("faqs.destroy", {
                                                 id: faq.id,
                                             }),
                                             { preserveScroll: true }
                                         );
-                                    }} 
-                                    className="text-danger focus:text-danger focus:bg-danger-foreground/50">
+                                    }}
+                                    className="text-danger focus:text-danger focus:bg-danger-foreground/50"
+                                >
                                     Hapus
                                 </DropdownMenuItem>
                             </ListItemDropdown>

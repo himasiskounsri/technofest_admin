@@ -21,13 +21,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $avatar = Avatar::select('id')->inRandomOrder()->first();
-        $festival_2023 = Festival::select('id')->where('period', '2023')->first();
         $festivalId = Festival::select('id')->orderByDesc('period')->first();
 
 
         return [
             'uid' => nanoUid(),
-            'name' => fake()->name(),
+            'name' => fake("id_ID")->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -35,7 +34,6 @@ class UserFactory extends Factory
             'role' => Arr::random(config('constants.user_role')),
             'avatar_id' => $avatar->id,
             'selected_festival' => $festivalId->id,
-            'festival_id' => $festival_2023->id
         ];
     }
 

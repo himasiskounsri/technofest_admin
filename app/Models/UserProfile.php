@@ -16,7 +16,8 @@ class UserProfile extends Model
         'line',
         'institution',
         'gender',
-        'user_id'
+        'user_id',
+        'student_id_number'
     ];
 
     public function user(): BelongsTo

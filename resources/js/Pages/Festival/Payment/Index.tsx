@@ -19,7 +19,7 @@ import {
 } from "@/Components/Ui/Tabs";
 import SectionTitle from "@/Layouts/SidebarLayout/SectionTitle";
 import { PageProps } from "@/types";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { Flag, PlusCircle, Wallet } from "lucide-react";
 import FestivalLayout from "../Layout";
 import { DropdownMenuItem } from "@/Components/Ui/DropdownMenu";
@@ -73,7 +73,17 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                                 {payments.items.map((payment) => (
                                     <ListItem key={payment.id}>
                                         <ListItemTitle>
-                                            ID: {payment.uid}
+                                            <Link
+                                                href={route(
+                                                    "payments.show",
+                                                    payment.id
+                                                )}
+                                                method="get"
+                                                className="hover:underline"
+                                            >
+                                                ID:&nbsp;
+                                                {payment.event_registration.uid}
+                                            </Link>
                                         </ListItemTitle>
                                         <ListItemDescription>
                                             <ListItemDescriptionItem
@@ -85,7 +95,11 @@ export default function PaymentIndex({ auth, payments }: PageProps) {
                                             />
                                             <ListItemDescriptionItem
                                                 icon={Wallet}
-                                                value={`Rp${payment.event_registration.event.price}`}
+                                                value={`Rp${
+                                                    payment.event_registration.event.price.toLocaleString(
+                                                        "id-ID"
+                                                    ) || 0
+                                                }`}
                                             />
                                         </ListItemDescription>
                                         <div className="flex space-x-1 items-center mt-1">

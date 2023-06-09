@@ -26,7 +26,14 @@ export function MainNav({
             <NavLink
                 href={route("festivals.index")}
                 method="get"
-                active={route().current("festivals.index")}
+                active={
+                    route().current("festivals.*") ||
+                    route().current("events.*") ||
+                    route().current("registrations.*") ||
+                    route().current("participants.*") ||
+                    route().current("payments.*") ||
+                    route().current("faqs.*")
+                }
             >
                 Festival
             </NavLink>
@@ -42,11 +49,7 @@ export function MainNav({
             <NavLink
                 href={route("account.index")}
                 method="get"
-                active={
-                    route().current("account.index") ||
-                    route().current("account.index") ||
-                    route().current("account.index")
-                }
+                active={route().current("account.index")}
             >
                 Pengaturan
             </NavLink>

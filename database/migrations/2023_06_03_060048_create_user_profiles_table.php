@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->string("student_id_number")->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('line')->nullable();
             $table->string('institution')->nullable();

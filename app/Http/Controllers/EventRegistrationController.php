@@ -14,7 +14,7 @@ class EventRegistrationController extends Controller
      */
     public function index()
     {
-        $registrations = EventRegistration::with(['event:id,name', 'users'])
+        $registrations = EventRegistration::with(['event:id,name,type', 'users'])
             ->whereRelation('event', 'festival_id', session('current_festival_id'))
             ->get();
 
