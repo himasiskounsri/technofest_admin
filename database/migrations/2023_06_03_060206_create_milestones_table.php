@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('name');
             $table->date('date');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('is_global')->default(false);
             $table->ulid('event_id')->nullable()->constrained()->cascadeOnDelete();
             $table->ulid('festival_id')->nullable()->constrained()->cascadeOnDelete();

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('name')->unique();
             $table->unsignedTinyInteger('type');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->boolean('is_opened')->default(false);
             $table->unsignedInteger('price')->nullable();

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("student_id_number")->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('line')->nullable();
+            $table->string('instagram')->nullable();
             $table->string('institution')->nullable();
             $table->unsignedTinyInteger('gender')->nullable();
             $table->ulid('user_id')->nullable()->constrained()->cascadeOnDelete();

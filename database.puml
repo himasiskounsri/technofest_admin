@@ -1,0 +1,191 @@
+@startuml database
+
+entity users {
+    id: ulid
+    --
+    uid: string
+    name: string
+    email: string
+    role: unsignedTinyInt
+    string: password
+    selected_festival: ulid
+    --
+    avatar_id: ulid
+}
+
+entity user_profiles {
+    id: ulid
+    --
+    student_id_number: string
+    whatsapp: string
+    line: string
+    instagram: string
+    institution: string
+    gender: unsignedTinyInt
+    --
+    user_id: ulid
+}
+
+entity festivals {
+    id: ulid
+    --
+    period: year
+    name: string
+    theme: string
+    logo: string
+    description: text
+    start_date: date
+    end_date: date
+    is_active: boolean
+}
+
+entity events {
+    id: ulid
+    --
+    name: string
+    type: unsignedTinyInt
+    description: text
+    image: string
+    is_opened: boolean
+    price: unsignedInt
+    held_id: string
+    held_on: datetime
+    --
+    festival_id: ulid
+}
+
+entity event_registrations {
+    id: ulid
+    --
+    uid: string
+    name: string
+    --
+    event_id: ulid
+}
+
+entity event_registration_payments {
+    id: ulid
+    --
+    status: unsignedTinyInt
+    payment_proof: string
+    --
+    event_registration_id: ulid
+    confirmed_by: ulid
+}
+
+entity milestones {
+    id: ulid
+    --
+    name: string
+    date: date
+    description: text
+    is_global: boolean
+    --
+    event_id: ulid
+    festival_id: ulid
+}
+
+entity contact_persons {
+    id: ulid
+    --
+    name: string
+    whatsapp: string
+    line: string
+    instagram: string
+    is_global: boolean
+    --
+    event_id: ulid
+    festival_id: ulid
+}
+
+entity competitions {
+    id: ulid
+    --
+    max_participants: unsignedInt
+    --
+    event_id: ulid
+}
+
+entity seminars {
+    id: ulid
+    --
+    --
+    event_id: ulid
+}
+
+entity seminar_casts {
+    id: ulid
+    --
+    name: string
+    title: string
+    image: string
+    role: unsignedTinyInt
+    --
+    seminar_id: ulid
+}
+
+entity faqs {
+    id: ulid
+    --
+    question: string
+    answer: text
+    is_highlighted: boolean
+    --
+    created_by: ulid
+    festival_id: ulid
+}
+
+entity event_registration_user {
+    role: unsignedTinyInt
+    --
+    user_id: ulid
+    event_registration_id: ulid
+}
+
+entity festival_user {
+    user_id: ulid
+    festival_id: ulid
+}
+
+entity avatars {
+    id: ulid
+    --
+    image: string
+}
+
+events }o-- festivals
+
+events --o{ contact_persons
+
+events --o{ milestones
+
+events -- competitions
+
+events -- seminars
+
+events --o{ event_registrations
+
+seminars --o{ seminar_casts
+
+festivals --o{ faqs
+
+festivals --o{ contact_persons
+
+festivals --o{ milestones
+
+users --o| user_profiles
+
+users }o--o{ festivals
+(users, festivals) .. festival_user
+
+users }o-- avatars
+
+users }o--o{ event_registrations
+(users, event_registrations) .. event_registration_user
+
+users --o{ event_registration_payments
+
+event_registrations --o| event_registration_payments
+
+@enduml
+
