@@ -45,9 +45,18 @@ class EventRegistrationPaymentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(EventRegistrationPayment $eventRegistrationPayment)
+    public function show(string $id)
     {
-        //
+        $payment = EventRegistrationPayment::with(['eventRegistration', 'eventRegistration.event', 'eventRegistration.users'])
+            ->find($id);
+
+        if (!$payment) {
+            return to_route('payments.index');
+        }
+
+        return Inertia::render('Festival/Payment/Show', [
+            'payment' => $payment
+        ]);
     }
 
     /**

@@ -32,8 +32,6 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $request->session()->put('current_festival_id', $request->user()->selected_festival);
-
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);

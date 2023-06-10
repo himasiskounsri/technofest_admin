@@ -11,6 +11,8 @@ use App\Http\Controllers\FestivalPeriodController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\RegistrationManagerTokenController;
+use App\Http\Controllers\SeminarController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,11 +51,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('/festival')->group(function () {
         Route::resource('/festivals', FestivalController::class);
-        Route::resource('/events', EventController::class);
-        Route::resource('/registrations', EventRegistrationController::class);
-        Route::resource('/participants', ParticipantController::class);
-        Route::resource('/payments', EventRegistrationPaymentController::class);
-        Route::resource('/faqs', FaqController::class);
+        Route::resource('/events', EventController::class)->missing(fn () => redirect()->route('events.index'));
+        Route::resource('/registrations', EventRegistrationController::class)->missing(fn () => redirect()->route('registrations.index'));
+        Route::resource('/participants', ParticipantController::class)->missing(fn () => redirect()->route('participants.index'));
+        Route::resource('/payments', EventRegistrationPaymentController::class)->missing(fn () => redirect()->route('payments.index'));
+        Route::resource('/faqs', FaqController::class)->missing(fn () => redirect()->route('faqs.index'));
     });
 
     Route::prefix('/user')->group(function () {

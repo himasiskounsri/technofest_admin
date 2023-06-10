@@ -56,6 +56,7 @@ export interface User {
     role: number;
     event_registrations: EventRegistration[];
     avatar: Avatar;
+    selected_festival: string;
     user_profile: UserProfile;
     event_registrant: EventRegistrant;
     created_at: string;
@@ -143,6 +144,7 @@ export interface EventRegistrationPayment {
     event_registration: EventRegistration;
     status: number;
     payment_proof: string;
+    uploaded_at: string;
     created_at: string;
     updated_at: string;
 }

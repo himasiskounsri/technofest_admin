@@ -68,6 +68,7 @@ entity event_registration_payments {
     --
     status: unsignedTinyInt
     payment_proof: string
+    uploaded_at: datetime
     --
     event_registration_id: ulid
     confirmed_by: ulid

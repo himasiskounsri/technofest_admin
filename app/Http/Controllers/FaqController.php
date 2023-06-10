@@ -43,16 +43,16 @@ class FaqController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Faq $faq)
     {
-        $faq = Faq::with(['user:id,name'])
-            ->find($id);
 
         if (!$faq) {
             return to_route('faqs.index');
         }
 
-        return Inertia::render('Festival/Faq/Show', ['faq' => $faq]);
+        return Inertia::render('Festival/Faq/Show', [
+            'faq' => $faq->load(['user:id,name'])
+        ]);
     }
 
     /**

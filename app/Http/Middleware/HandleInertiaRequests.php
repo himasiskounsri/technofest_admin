@@ -43,7 +43,6 @@ class HandleInertiaRequests extends Middleware
             },
             'constants' => config('constants'),
             'festivals' => Festival::all(),
-            'current_festival_id' => $request->session()->get('current_festival_id'),
             'flash' => [
                 'message' => fn () => $request->session()->get('message')
             ],

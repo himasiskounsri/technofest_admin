@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->unsignedTinyInteger('status');
             $table->string('payment_proof')->nullable();
+            $table->datetime('uploaded_at')->nullable();
             $table->ulid('event_registration_id')->constrained()->cascadeOnDelete();
             $table->foreignUlid('confirmed_by')->nullable()->references('id')->on('users')->constrained()->nullOnDelete();
             $table->timestamps();
