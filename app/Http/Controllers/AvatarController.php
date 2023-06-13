@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Avatar;
 use App\Http\Requests\StoreAvatarRequest;
 use App\Http\Requests\UpdateAvatarRequest;
+use App\Models\Avatar;
 
 class AvatarController extends Controller
 {

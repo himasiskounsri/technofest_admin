@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Festival;
 use App\Http\Requests\StoreFestivalRequest;
 use App\Http\Requests\UpdateFestivalRequest;
+use App\Models\Festival;
 use Inertia\Inertia;
 
 class FestivalController extends Controller

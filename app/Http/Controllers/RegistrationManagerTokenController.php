@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RegistrationManagerToken;
 use App\Http\Requests\StoreRegistrationManagerTokenRequest;
 use App\Http\Requests\UpdateRegistrationManagerTokenRequest;
+use App\Models\RegistrationManagerToken;
 use Inertia\Inertia;
 
 class RegistrationManagerTokenController extends Controller

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Faq;
 use App\Http\Requests\StoreFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
-use Inertia\Inertia;
+use App\Models\Faq;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class FaqController extends Controller
 {
@@ -46,12 +46,12 @@ class FaqController extends Controller
     public function show(Faq $faq)
     {
 
-        if (!$faq) {
+        if (! $faq) {
             return to_route('faqs.index');
         }
 
         return Inertia::render('Festival/Faq/Show', [
-            'faq' => $faq->load(['user:id,name'])
+            'faq' => $faq->load(['user:id,name']),
         ]);
     }
 
@@ -81,6 +81,6 @@ class FaqController extends Controller
 
         return redirect()
             ->route('faqs.index')
-            ->with('message', "Faq <b>" . Str::limit($faq->question, 20) . "</b> berhasil dihapus");
+            ->with('message', 'Faq <b>'.Str::limit($faq->question, 20).'</b> berhasil dihapus');
     }
 }

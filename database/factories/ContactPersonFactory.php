@@ -17,8 +17,8 @@ class ContactPersonFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake("id_ID")->name(),
-            'whatsapp' => fake("id_ID")->e164PhoneNumber(),
+            'name' => fake('id_ID')->name(),
+            'whatsapp' => fake('id_ID')->e164PhoneNumber(),
             'is_global' => false,
         ];
     }

@@ -13,7 +13,7 @@ class Seminar extends Model
     use HasFactory, HasUlids;
 
     protected $fillable = [
-        'event_id'
+        'event_id',
     ];
 
     public function event(): BelongsTo

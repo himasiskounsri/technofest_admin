@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Avatar;
-use App\Models\Competition;
 use App\Models\Event;
 use App\Models\EventRegistration;
 use App\Models\EventRegistrationPayment;
@@ -12,7 +11,6 @@ use App\Models\Festival;
 use App\Models\Seminar;
 use App\Models\SeminarCast;
 use App\Models\User;
-use App\Models\UserProfile;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -36,36 +34,36 @@ class DatabaseSeeder extends Seeder
     {
         $festival_2023 = Festival::factory()
             ->hasContactPersons(4, [
-                'is_global' => true
+                'is_global' => true,
             ])
             ->hasMilestones(4, [
-                'is_global' => true
+                'is_global' => true,
             ])
             ->create([
                 'period' => '2023',
-                'name' => "Technology Festival #4",
-                'theme' => "Green Technologies: Bla2",
+                'name' => 'Technology Festival #4',
+                'theme' => 'Green Technologies: Bla2',
                 'description' => fake()->paragraph(),
                 'start_date' => new Carbon('2023-08-02'),
                 'end_date' => new Carbon('2023-08-24'),
-                'is_active' => true
+                'is_active' => true,
             ]);
 
         $festival_2024 = Festival::factory()
             ->hasContactPersons(4, [
-                'is_global' => true
+                'is_global' => true,
             ])
             ->hasMilestones(4, [
-                'is_global' => true
+                'is_global' => true,
             ])
             ->create([
                 'period' => '2024',
-                'name' => "Technology Festival #5",
-                'theme' => "Black Technologies: Dark Web Access",
+                'name' => 'Technology Festival #5',
+                'theme' => 'Black Technologies: Dark Web Access',
                 'description' => fake()->paragraph(),
                 'start_date' => new Carbon('2024-08-02'),
                 'end_date' => new Carbon('2024-08-24'),
-                'is_active' => false
+                'is_active' => false,
             ]);
 
         return $festival_2023;
@@ -82,7 +80,7 @@ class DatabaseSeeder extends Seeder
             ->hasAttached($festival)
             ->hasUserProfile()
             ->create([
-                'role' => config('constants.user_role.participant')
+                'role' => config('constants.user_role.participant'),
             ]);
     }
 
@@ -91,7 +89,7 @@ class DatabaseSeeder extends Seeder
         return User::factory(10)
             ->hasAttached($festival)
             ->create([
-                'role' => config('constants.user_role.manager')
+                'role' => config('constants.user_role.manager'),
             ]);
     }
 
@@ -120,22 +118,22 @@ class DatabaseSeeder extends Seeder
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
                         $participants->random(3),
-                        ["role" => 2]
+                        ['role' => 2]
                     )
                     ->hasAttached(
                         $participants->random(),
-                        ["role" => 1]
+                        ['role' => 1]
                     )
             )
             ->hasCompetition(1, [
-                'max_participants' => 4
+                'max_participants' => 4,
             ])
             ->for($festival)
             ->create([
                 'name' => 'UI/UX',
                 'type' => config('constants.event_type.competition'),
                 'is_opened' => false,
-                'price' => 40000
+                'price' => 40000,
             ]);
 
         $event_competitive_programming = Event::factory()
@@ -147,22 +145,22 @@ class DatabaseSeeder extends Seeder
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
                         $participants->random(3),
-                        ["role" => 2]
+                        ['role' => 2]
                     )
                     ->hasAttached(
                         $participants->random(),
-                        ["role" => 1]
+                        ['role' => 1]
                     )
             )
             ->hasCompetition(1, [
-                'max_participants' => 4
+                'max_participants' => 4,
             ])
             ->for($festival)
             ->create([
                 'name' => 'Competitive Programming',
                 'type' => config('constants.event_type.competition'),
                 'is_opened' => false,
-                'price' => 40000
+                'price' => 40000,
             ]);
 
         $event_essay = Event::factory()
@@ -174,18 +172,18 @@ class DatabaseSeeder extends Seeder
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
                         $participants->random(),
-                        ["role" => 0]
+                        ['role' => 0]
                     )
             )
             ->hasCompetition(1, [
-                'max_participants' => 1
+                'max_participants' => 1,
             ])
             ->for($festival)
             ->create([
                 'name' => 'Essay',
                 'type' => config('constants.event_type.competition'),
                 'is_opened' => false,
-                'price' => 1000000
+                'price' => 1000000,
             ]);
 
         $event_poster = Event::factory()
@@ -197,18 +195,18 @@ class DatabaseSeeder extends Seeder
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
                         $participants->random(),
-                        ["role" => 0]
+                        ['role' => 0]
                     )
             )
             ->hasCompetition(1, [
-                'max_participants' => 1
+                'max_participants' => 1,
             ])
             ->for($festival)
             ->create([
                 'name' => 'Poster',
                 'type' => config('constants.event_type.competition'),
                 'is_opened' => false,
-                'price' => 20000
+                'price' => 20000,
             ]);
 
         $event_seminar = Event::factory()
@@ -221,14 +219,14 @@ class DatabaseSeeder extends Seeder
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
                         $participants->random(),
-                        ["role" => 0]
+                        ['role' => 0]
                     )
             )
             ->create([
                 'name' => 'Seminar',
                 'type' => config('constants.event_type.seminar'),
                 'is_opened' => false,
-                'price' => 40000
+                'price' => 40000,
             ]);
 
         $seminar = Seminar::factory()

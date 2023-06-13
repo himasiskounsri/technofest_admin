@@ -6,8 +6,6 @@ use App\Models\EventRegistration;
 use App\Models\EventRegistrationPayment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -30,7 +28,7 @@ class DashboardController extends Controller
         return Inertia::render('_Dashboard', [
             'participants_count' => $participants_count,
             'registrations_count' => $registrations_count,
-            'payments_count' => $payments_count
+            'payments_count' => $payments_count,
         ]);
     }
 }

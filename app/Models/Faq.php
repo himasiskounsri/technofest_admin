@@ -15,7 +15,7 @@ class Faq extends Model
         'question',
         'answer',
         'is_highlighted',
-        'created_by'
+        'created_by',
     ];
 
     public function user(): BelongsTo

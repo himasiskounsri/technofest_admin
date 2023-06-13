@@ -16,7 +16,7 @@ class SeminarCast extends Model
         'title',
         'image',
         'role',
-        'seminar_id'
+        'seminar_id',
     ];
 
     public function seminar(): BelongsTo

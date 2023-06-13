@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Seminar;
 use App\Http\Requests\StoreSeminarRequest;
 use App\Http\Requests\UpdateSeminarRequest;
+use App\Models\Seminar;
 
 class SeminarController extends Controller
 {

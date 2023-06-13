@@ -14,7 +14,7 @@ class EventRegistrationPayment extends Model
     protected $fillable = [
         'status',
         'payment_proof',
-        'event_registration_id'
+        'event_registration_id',
     ];
 
     public function eventRegistration(): BelongsTo

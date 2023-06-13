@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Festival;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class SettingController extends Controller

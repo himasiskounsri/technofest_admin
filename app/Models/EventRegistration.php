@@ -15,7 +15,7 @@ class EventRegistration extends Model
 
     protected $fillable = [
         'uid',
-        'event_id'
+        'event_id',
     ];
 
     public function users(): BelongsToMany

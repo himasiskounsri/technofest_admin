@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventRegistrationPayment;
 use App\Http\Requests\StoreEventRegistrationPaymentRequest;
 use App\Http\Requests\UpdateEventRegistrationPaymentRequest;
-use App\Models\Event;
-use App\Models\EventRegistration;
-use Illuminate\Support\Facades\DB;
+use App\Models\EventRegistrationPayment;
 use Inertia\Inertia;
 
 class EventRegistrationPaymentController extends Controller
@@ -22,7 +19,7 @@ class EventRegistrationPaymentController extends Controller
             ->get();
 
         return Inertia::render('Festival/Payment/Index', [
-            'payments' => $payments
+            'payments' => $payments,
         ]);
     }
 
@@ -50,12 +47,12 @@ class EventRegistrationPaymentController extends Controller
         $payment = EventRegistrationPayment::with(['eventRegistration', 'eventRegistration.event', 'eventRegistration.users'])
             ->find($id);
 
-        if (!$payment) {
+        if (! $payment) {
             return to_route('payments.index');
         }
 
         return Inertia::render('Festival/Payment/Show', [
-            'payment' => $payment
+            'payment' => $payment,
         ]);
     }
 

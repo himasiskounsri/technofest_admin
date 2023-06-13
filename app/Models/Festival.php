@@ -17,7 +17,7 @@ class Festival extends Model
         'theme',
         'description',
         'start_date',
-        'end_date'
+        'end_date',
     ];
 
     public function events(): HasMany

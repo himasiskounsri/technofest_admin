@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
-use App\Models\Competition;
-use App\Models\Seminar;
+use App\Models\Event;
 use Inertia\Inertia;
-use Symfony\Component\Uid\Ulid;
 
 class EventController extends Controller
 {
@@ -51,7 +48,7 @@ class EventController extends Controller
             ->withCount('eventRegistrations')
             ->find($id);
 
-        if (!$event) {
+        if (! $event) {
             return to_route('events.index');
         }
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Competition;
 use App\Http\Requests\StoreCompetitionRequest;
 use App\Http\Requests\UpdateCompetitionRequest;
+use App\Models\Competition;
 
 class CompetitionController extends Controller
 {

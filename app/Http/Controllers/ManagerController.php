@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ManagerController extends Controller
@@ -20,7 +19,7 @@ class ManagerController extends Controller
             ->get();
 
         return Inertia::render('User/Manager/Index', [
-            'managers' => $managers
+            'managers' => $managers,
         ]);
     }
 }

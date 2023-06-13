@@ -11,6 +11,6 @@ class RegistrationManagerToken extends Model
 
     protected $fillable = [
         'token',
-        'expired_at'
+        'expired_at',
     ];
 }

@@ -21,7 +21,7 @@ class Event extends Model
         'is_opened',
         'price',
         'held_in',
-        'held_on'
+        'held_on',
     ];
 
     public function competition(): HasOne

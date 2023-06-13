@@ -20,7 +20,7 @@ class ContactPerson extends Model
         'instagram',
         'is_global',
         'event_id',
-        'festival_id'
+        'festival_id',
     ];
 
     public function event(): BelongsTo

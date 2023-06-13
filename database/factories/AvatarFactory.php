@@ -26,7 +26,7 @@ class AvatarFactory extends Factory
         $url .= "?s=$s&d=$d&r=$r";
 
         return [
-            'image' => $url
+            'image' => $url,
         ];
     }
 }

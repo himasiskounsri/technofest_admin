@@ -34,6 +34,6 @@ return [
     'payment_status' => [
         'not_confirmed' => 0,
         'accepted' => 1,
-        'rejected' => 2
+        'rejected' => 2,
     ],
 ];

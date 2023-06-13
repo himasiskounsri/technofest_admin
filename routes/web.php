@@ -11,8 +11,6 @@ use App\Http\Controllers\FestivalPeriodController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\RegistrationManagerTokenController;
-use App\Http\Controllers\SeminarController;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,8 +36,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
-
-
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -70,4 +66,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('/festival-period', [FestivalPeriodController::class, 'update'])->name('festival_period.update');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

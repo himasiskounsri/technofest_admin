@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FestivalPeriodController extends Controller
 {
@@ -11,7 +10,7 @@ class FestivalPeriodController extends Controller
     {
         // dd($request->input('festival_id'));
         $user = $request->user()->fill([
-            'selected_festival' => $request->input('festival_id')
+            'selected_festival' => $request->input('festival_id'),
         ]);
 
         $user->save();

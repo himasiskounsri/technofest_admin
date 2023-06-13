@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SeminarCast;
 use App\Http\Requests\StoreSeminarCastRequest;
 use App\Http\Requests\UpdateSeminarCastRequest;
+use App\Models\SeminarCast;
 
 class SeminarCastController extends Controller
 {

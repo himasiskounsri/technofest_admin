@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactPerson;
 use App\Http\Requests\StoreContactPersonRequest;
 use App\Http\Requests\UpdateContactPersonRequest;
+use App\Models\ContactPerson;
 
 class ContactPersonController extends Controller
 {

@@ -34,7 +34,7 @@ class HandleInertiaRequests extends Middleware
         // dd($request->session()->get('current_festival_id'));
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user() !== null ? $request->user()->load(['avatar']) : null
+                'user' => $request->user() !== null ? $request->user()->load(['avatar']) : null,
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
@@ -44,7 +44,7 @@ class HandleInertiaRequests extends Middleware
             'constants' => config('constants'),
             'festivals' => Festival::all(),
             'flash' => [
-                'message' => fn () => $request->session()->get('message')
+                'message' => fn () => $request->session()->get('message'),
             ],
         ]);
     }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ParticipantController extends Controller
@@ -27,7 +26,7 @@ class ParticipantController extends Controller
         $participant = User::with(['avatar:id,image', 'userProfile', 'eventRegistrations', 'eventRegistrations.event'])
             ->find($id);
 
-        if (!$participant) {
+        if (! $participant) {
             return to_route('participants.index');
         }
 

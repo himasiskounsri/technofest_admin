@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Milestone;
 use App\Http\Requests\StoreMilestoneRequest;
 use App\Http\Requests\UpdateMilestoneRequest;
+use App\Models\Milestone;
 
 class MilestoneController extends Controller
 {
