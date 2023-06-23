@@ -17,7 +17,10 @@ class ParticipantProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'whatsapp' => fake('id_ID')->e164PhoneNumber(),
+            'institution' => fake()->word(),
+            'gender' => fake()->numberBetween(1, 2),
+            'student_id_number' => fake()->regexify('[0-9]{9}'),
         ];
     }
 }

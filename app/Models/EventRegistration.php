@@ -18,9 +18,9 @@ class EventRegistration extends Model
         'event_id',
     ];
 
-    public function users(): BelongsToMany
+    public function participants(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withPivot('role')->withTimestamps()->as('event_registrant');
+        return $this->belongsToMany(Participant::class)->withPivot('role')->withTimestamps()->as('event_registrant');
     }
 
     public function event(): BelongsTo

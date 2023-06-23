@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('seminars', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->ulid('event_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

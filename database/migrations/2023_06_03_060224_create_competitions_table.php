@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('competitions', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->unsignedInteger('max_participants')->default(1);
+            $table->ulid('event_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

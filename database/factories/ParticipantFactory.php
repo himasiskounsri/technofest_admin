@@ -17,7 +17,7 @@ class ParticipantFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "provider" => config('constants.participant_provider.google')
         ];
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
@@ -25,9 +26,14 @@ class Event extends Model
         'held_on',
     ];
 
-    public function eventable(): MorphTo
+    public function competition(): HasOne
     {
-        return $this->morphTo();
+        return $this->hasOne(Competition::class);
+    }
+
+    public function seminar(): HasOne
+    {
+        return $this->hasOne(Seminar::class);
     }
 
     public function eventRegistrations(): HasMany

@@ -37,4 +37,10 @@ return [
         'accepted' => 1,
         'rejected' => 2,
     ],
+
+    'participant_provider' => [
+        'credentials' => 0,
+        'google' => 1,
+        'github' => 2
+    ]
 ];

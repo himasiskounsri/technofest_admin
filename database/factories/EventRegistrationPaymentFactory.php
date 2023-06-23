@@ -19,7 +19,7 @@ class EventRegistrationPaymentFactory extends Factory
         return [
 
             'status' => fake()->numberBetween(0, 2),
-            'payment_proof' => fake()->imageUrl(640, 480, 'animals', true),
+            'proof' => fake()->imageUrl(640, 480, 'animals', true),
         ];
     }
 }

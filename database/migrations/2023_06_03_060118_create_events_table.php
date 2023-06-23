@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->unsignedTinyInteger('type');
             $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
@@ -20,8 +21,6 @@ return new class extends Migration
             $table->unsignedInteger('price')->nullable();
             $table->string('held_in')->nullable();
             $table->dateTime('held_on')->nullable();
-            $table->ulid('eventable_id')->constrained()->cascadeOnDelete();
-            $table->string('eventable_type');
             $table->ulid('festival_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

@@ -3,11 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\Avatar;
+use App\Models\Competition;
 use App\Models\Event;
 use App\Models\EventRegistration;
 use App\Models\EventRegistrationPayment;
 use App\Models\Faq;
 use App\Models\Festival;
+use App\Models\Participant;
+use App\Models\ParticipantProfile;
 use App\Models\Seminar;
 use App\Models\SeminarCast;
 use App\Models\User;
@@ -26,19 +29,16 @@ class DatabaseSeeder extends Seeder
         $participants = $this->createParticipants($festival_2023);
         $managers = $this->createManagers($festival_2023);
         $admin = $this->createAdmin($festival_2023, $avatars[0]);
-        $events = $this->createEvents($festival_2023, $participants);
-        $faqs = $this->createFaqs($festival_2023, $managers);
+        $this->createEvents($festival_2023, $participants);
+        $this->createFaqs($festival_2023, $managers);
+
     }
 
     public function createFestivals()
     {
         $festival_2023 = Festival::factory()
-            ->hasContactPersons(4, [
-                'is_global' => true,
-            ])
-            ->hasMilestones(4, [
-                'is_global' => true,
-            ])
+            ->hasContactPersons(4)
+            ->hasMilestones(4)
             ->create([
                 'period' => '2023',
                 'name' => 'Technology Festival #4',
@@ -50,12 +50,8 @@ class DatabaseSeeder extends Seeder
             ]);
 
         $festival_2024 = Festival::factory()
-            ->hasContactPersons(4, [
-                'is_global' => true,
-            ])
-            ->hasMilestones(4, [
-                'is_global' => true,
-            ])
+            ->hasContactPersons(4)
+            ->hasMilestones(4)
             ->create([
                 'period' => '2024',
                 'name' => 'Technology Festival #5',
@@ -78,7 +74,7 @@ class DatabaseSeeder extends Seeder
     {
         return User::factory(50)
             ->hasAttached($festival)
-            ->hasUserProfile()
+            ->has(Participant::factory()->has(ParticipantProfile::factory()))
             ->create([
                 'role' => config('constants.user_role.participant'),
             ]);
@@ -117,17 +113,15 @@ class DatabaseSeeder extends Seeder
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
-                        $participants->random(3),
+                        $participants->random(3)->map(fn ($item) => $item->participant),
                         ['role' => 2]
                     )
                     ->hasAttached(
-                        $participants->random(),
+                        $participants->random()->participant,
                         ['role' => 1]
                     )
             )
-            ->hasCompetition(1, [
-                'max_participants' => 4,
-            ])
+            ->hasCompetition(['max_participants' => 4])
             ->for($festival)
             ->create([
                 'name' => 'UI/UX',
@@ -144,17 +138,15 @@ class DatabaseSeeder extends Seeder
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
-                        $participants->random(3),
+                        $participants->random(3)->map(fn ($item) => $item->participant),
                         ['role' => 2]
                     )
                     ->hasAttached(
-                        $participants->random(),
+                        $participants->random()->participant,
                         ['role' => 1]
                     )
             )
-            ->hasCompetition(1, [
-                'max_participants' => 4,
-            ])
+            ->hasCompetition(['max_participants' => 4])
             ->for($festival)
             ->create([
                 'name' => 'Competitive Programming',
@@ -171,13 +163,11 @@ class DatabaseSeeder extends Seeder
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
-                        $participants->random(),
+                        $participants->random()->participant,
                         ['role' => 0]
                     )
             )
-            ->hasCompetition(1, [
-                'max_participants' => 1,
-            ])
+            ->hasCompetition(['max_participants' => 1])
             ->for($festival)
             ->create([
                 'name' => 'Essay',
@@ -194,13 +184,11 @@ class DatabaseSeeder extends Seeder
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
-                        $participants->random(),
+                        $participants->random()->participant,
                         ['role' => 0]
                     )
             )
-            ->hasCompetition(1, [
-                'max_participants' => 1,
-            ])
+            ->hasCompetition(['max_participants' => 1])
             ->for($festival)
             ->create([
                 'name' => 'Poster',
@@ -218,7 +206,7 @@ class DatabaseSeeder extends Seeder
                     ->count(10)
                     ->has(EventRegistrationPayment::factory())
                     ->hasAttached(
-                        $participants->random(),
+                        $participants->random()->participant,
                         ['role' => 0]
                     )
             )

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->unsignedTinyInteger('provider');
             $table->ulid('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
