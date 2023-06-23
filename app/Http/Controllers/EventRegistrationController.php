@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRegistrationRequest;
 use App\Http\Requests\UpdateEventRegistrationRequest;
 use App\Models\EventRegistration;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class EventRegistrationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): Response
     {
-        $registrations = EventRegistration::with(['event:id,name,type', 'users'])
-            ->whereRelation('event', 'festival_id', session('current_festival_id'))
+        $registrations = EventRegistration::with(['event:id,name,type', 'participants'])
+            ->whereRelation('event', 'festival_id', $request->user()->selected_festival)
             ->get();
 
         return Inertia::render('Festival/Registration/Index', [

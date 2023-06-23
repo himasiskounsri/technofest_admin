@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class FestivalPeriodController extends Controller
 {
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
-        // dd($request->input('festival_id'));
         $user = $request->user()->fill([
             'selected_festival' => $request->input('festival_id'),
         ]);

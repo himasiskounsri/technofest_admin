@@ -5,19 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use App\Models\Faq;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class FaqController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): Response
     {
         $faqs = Faq::with(['user:id,name'])
             ->orderBy('is_highlighted', 'desc')
-            ->where('festival_id', session('current_festival_id'))
+            ->where('festival_id', $request->user()->selected_festival)
             ->get();
 
         return Inertia::render('Festival/Faq/Index', [
@@ -43,9 +46,8 @@ class FaqController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Faq $faq)
+    public function show(Faq $faq): Response|RedirectResponse
     {
-
         if (! $faq) {
             return to_route('faqs.index');
         }
@@ -74,7 +76,7 @@ class FaqController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $faq = Faq::find($id);
         $faq->delete();

@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): Response
     {
         $events = Event::with(['competition', 'seminar', 'seminar.seminarCasts'])
-            ->where('festival_id', session('current_festival_id'))
+            ->where('festival_id', $request->user()->selected_festival)
             ->get();
 
         return Inertia::render('Festival/Event/Index', [
@@ -42,7 +45,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): Response|RedirectResponse
     {
         $event = Event::with(['competition', 'seminar', 'seminar.seminarCasts'])
             ->withCount('eventRegistrations')
@@ -71,7 +74,7 @@ class EventController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $event = Event::find($id);
         $event->delete();

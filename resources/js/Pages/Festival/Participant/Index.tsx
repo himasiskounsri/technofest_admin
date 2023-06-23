@@ -64,12 +64,12 @@ export default function ParticipantIndex({ auth, participants }: PageProps) {
                                 <Avatar className="h-8 w-8 rounded-full">
                                     <AvatarImage
                                         className="bg-slate-200"
-                                        src={participant.avatar.image}
-                                        alt={participant.name}
+                                        src={participant.user.avatar.image}
+                                        alt={participant.user.name}
                                     />
                                     <AvatarFallback>
                                         {getFirstLetters(
-                                            participant.name
+                                            participant.user.name
                                         ).toUpperCase()}
                                     </AvatarFallback>
                                 </Avatar>
@@ -84,13 +84,13 @@ export default function ParticipantIndex({ auth, participants }: PageProps) {
                                         method="get"
                                         className="hover:underline"
                                     >
-                                        {participant.name}
+                                        {participant.user.name}
                                     </Link>
                                 </ListItemTitle>
                                 <ListItemDescription>
                                     <ListItemDescriptionItem
                                         icon={Fingerprint}
-                                        value={`NIM/NISN: ${participant.user_profile.student_id_number}`}
+                                        value={`NIM/NISN: ${participant.participant_profile.student_id_number}`}
                                     />
                                     <ListItemDescriptionItem
                                         icon={Fan}

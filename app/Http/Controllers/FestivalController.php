@@ -6,13 +6,14 @@ use App\Http\Requests\StoreFestivalRequest;
 use App\Http\Requests\UpdateFestivalRequest;
 use App\Models\Festival;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class FestivalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Festival/Festival/Index');
     }

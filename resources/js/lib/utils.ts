@@ -60,10 +60,10 @@ export function formatDate(
 }
 
 export function currentFestival(): Festival {
-    const { current_festival_id, festivals }: any = usePage().props;
+    const { festivals, auth }: any = usePage().props;
 
     return festivals.filter(
-        (festival: Festival) => festival.id == current_festival_id
+        (festival: Festival) => festival.id == auth.user.selected_festival
     )[0];
 }
 

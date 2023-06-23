@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRegistrationPaymentRequest;
 use App\Http\Requests\UpdateEventRegistrationPaymentRequest;
 use App\Models\EventRegistrationPayment;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class EventRegistrationPaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): Response
     {
         $payments = EventRegistrationPayment::with(['eventRegistration', 'eventRegistration.event:id,name,price'])
-            ->whereRelation('eventRegistration.event', 'festival_id', session('current_festival_id'))
+            ->whereRelation('eventRegistration.event', 'festival_id', $request->user()->selected_festival)
             ->get();
 
         return Inertia::render('Festival/Payment/Index', [
@@ -42,7 +45,7 @@ class EventRegistrationPaymentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): Response|RedirectResponse
     {
         $payment = EventRegistrationPayment::with(['eventRegistration', 'eventRegistration.event', 'eventRegistration.users'])
             ->find($id);

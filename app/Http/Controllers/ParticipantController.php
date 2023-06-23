@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Participant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ParticipantController extends Controller
 {
-    public function index()
+    public function index(Request $request): Response
     {
-        $participants = User::with(['avatar:id,image', 'userProfile'])
-            ->where('role', config('constants.user_role.participant'))
-            ->whereHas('festivals', function (Builder $query) {
-                $query->where('festival_id', session('current_festival_id'));
-            })
+        $participants = Participant::with(['user:id,name,email,avatar_id', 'user.avatar:id,image', 'participantProfile'])
+            ->whereRelation('user.festivals', 'festival_id', $request->user()->selected_festival)
             ->withCount('eventRegistrations')
             ->get();
+
+//        dd($participants);
 
         return Inertia::render('Festival/Participant/Index', ['participants' => $participants]);
     }
@@ -33,13 +36,13 @@ class ParticipantController extends Controller
         return Inertia::render('Festival/Participant/Show', ['participant' => $participant]);
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        $participant = User::find($id);
+        $participant = Participant::find($id);
         $participant->delete();
 
         return redirect()
             ->route('participants.index')
-            ->with('message', "Partisipan <b>{$participant->name}</b> berhasil dihapus");
+            ->with('message', "Partisipan <b>{$participant->user->name}</b> berhasil dihapus");
     }
 }

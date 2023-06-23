@@ -84,7 +84,7 @@ export default function RegistrationIndex({ auth, registrations }: PageProps) {
                                             />
                                             <ListItemDescriptionItem
                                                 icon={Users}
-                                                value={`${registration.users.length} orang`}
+                                                value={`${registration.participants.length} orang`}
                                             />
                                         </ListItemDescription>
                                         <ListItemContent>
