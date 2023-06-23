@@ -31,5 +31,6 @@ class EventRegistration extends Model
     public function eventRegistrationPayment(): HasOne
     {
         return $this->hasOne(EventRegistrationPayment::class);
+
     }
 }

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_registration_user', function (Blueprint $table) {
-            $table->unsignedTinyInteger('role');
+        Schema::create('participants', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedTinyInteger('provider');
             $table->ulid('user_id')->constrained()->cascadeOnDelete();
-            $table->ulid('event_registration_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event_registration_user');
+        Schema::dropIfExists('participants');
     }
 };

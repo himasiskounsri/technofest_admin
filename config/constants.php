@@ -2,6 +2,7 @@
 
 return [
     // The four gender codes specified in ISO/IEC 5218: https://en.wikipedia.org/wiki/ISO/IEC_5218
+    // http://dbpedia.org/resource/ISO/IEC_5218
     'gender' => [
         'not_known' => 0,
         'male' => 1,

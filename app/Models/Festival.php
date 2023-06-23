@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Festival extends Model
 {
@@ -35,13 +36,13 @@ class Festival extends Model
         return $this->hasMany(Faq::class);
     }
 
-    public function milestones(): HasMany
+    public function milestones(): MorphMany
     {
-        return $this->hasMany(Milestone::class);
+        return $this->morphMany(Milestone::class, 'milestoneable');
     }
 
-    public function contactPersons(): HasMany
+    public function contactPersons(): MorphMany
     {
-        return $this->hasMany(ContactPerson::class);
+        return $this->morphMany(ContactPerson::class, 'contact_personable');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Competition extends Model
 {
@@ -13,11 +13,10 @@ class Competition extends Model
 
     protected $fillable = [
         'max_participants',
-        'event_id',
     ];
 
-    public function event(): BelongsTo
+    public function event(): MorphOne
     {
-        return $this->belongsTo(Event::class);
+        return $this->morphOne(Event::class, 'eventable');
     }
 }

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('competitions', function (Blueprint $table) {
-            $table->ulid('id')->primary();
-            $table->unsignedInteger('max_participants')->default(1);
+        Schema::create('event_registration_participant', function (Blueprint $table) {
+            $table->unsignedTinyInteger('role');
+            $table->ulid('participant_id')->constrained()->cascadeOnDelete();
+            $table->ulid('event_registration_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('competitions');
+        Schema::dropIfExists('event_registration_participant');
     }
 };

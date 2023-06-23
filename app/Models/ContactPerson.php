@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class ContactPerson extends Model
 {
@@ -16,20 +16,12 @@ class ContactPerson extends Model
     protected $fillable = [
         'name',
         'whatsapp',
-        'line',
         'instagram',
-        'is_global',
-        'event_id',
-        'festival_id',
+        'line',
     ];
 
-    public function event(): BelongsTo
+    public function contactPersonable(): MorphTo
     {
-        return $this->belongsTo(Event::class);
-    }
-
-    public function festival(): BelongsTo
-    {
-        return $this->belongsTo(Festival::class);
+        return $this->morphTo();
     }
 }

@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contact_persons', function (Blueprint $table) {
+        Schema::create('participant_profiles', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name');
+            $table->string('student_id_number')->nullable();
+            $table->string('institution')->nullable();
+            $table->unsignedTinyInteger('gender')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('instagram')->nullable();
             $table->string('line')->nullable();
-            $table->ulid('contact_personable_id')->constrained()->cascadeOnDelete();
-            $table->string('contact_personable_type');
+            $table->ulid('participant_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contact_persons');
+        Schema::dropIfExists('participant_profiles');
     }
 };

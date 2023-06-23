@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('date');
             $table->text('description')->nullable();
-            $table->boolean('is_global')->default(false);
-            $table->ulid('event_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->ulid('festival_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->ulid('milestoneable_id')->constrained()->cascadeOnDelete();
+            $table->string('milestoneable_type');
             $table->timestamps();
         });
     }

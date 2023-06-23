@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Event extends Model
 {
@@ -24,14 +25,9 @@ class Event extends Model
         'held_on',
     ];
 
-    public function competition(): HasOne
+    public function eventable(): MorphTo
     {
-        return $this->hasOne(Competition::class);
-    }
-
-    public function seminar(): HasOne
-    {
-        return $this->hasOne(Seminar::class);
+        return $this->morphTo();
     }
 
     public function eventRegistrations(): HasMany
@@ -39,14 +35,14 @@ class Event extends Model
         return $this->hasMany(EventRegistration::class);
     }
 
-    public function milestones(): HasMany
+    public function milestones(): MorphMany
     {
-        return $this->hasMany(Milestone::class);
+        return $this->morphMany(Milestone::class, 'milestoneable');
     }
 
-    public function contactPersons(): HasMany
+    public function contactPersons(): MorphMany
     {
-        return $this->hasMany(ContactPerson::class);
+        return $this->morphMany(ContactPerson::class, 'contact_personable');
     }
 
     public function festival(): BelongsTo

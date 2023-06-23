@@ -13,7 +13,7 @@ class EventRegistrationPayment extends Model
 
     protected $fillable = [
         'status',
-        'payment_proof',
+        'proof',
         'event_registration_id',
     ];
 
